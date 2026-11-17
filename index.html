@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tema 4: Gestión y organización de la prevención — Cuestionario Interactivo</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-muted: #f1f5f9;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --accent-hover: #0369a1;
+      --accent-soft: #e0f2fe;
+      --success: #059669;
+      --success-bg: #ecfdf5;
+      --success-border: #6ee7b7;
+      --success-text: #065f46;
+      --error: #dc2626;
+      --error-bg: #fef2f2;
+      --error-border: #fca5a5;
+      --error-text: #991b1b;
+      --radius: 12px;
+      --font-sans: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .app-shell {
+      min-height: 100vh;
+      padding: 24px 16px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 920px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Welcome Layout */
+    .welcome-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (max-width: 820px) {
+      .welcome-grid {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 20px;
+      }
+    }
+
+    .kicker {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 0 0 8px;
+    }
+
+    h1 {
+      font-size: clamp(24px, 3vw, 32px);
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 12px;
+      color: var(--text);
+      text-wrap: balance;
+    }
+
+    .lead {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 0 0 16px;
+    }
+
+    .attribution {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 0 0 22px;
+    }
+
+    .topic-summary-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 10px;
+    }
+
+    .topic-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .topic-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13.5px;
+      color: var(--text-secondary);
+    }
+
+    .topic-list strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .topic-count {
+      font-size: 13px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .form-panel {
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .form-panel h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 16px;
+      color: var(--text);
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    label.field-label {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    select {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    select:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 16px 0 20px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .checkbox-row input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background-color 150ms cubic-bezier(0.16, 1, 0.3, 1), border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), color 150ms cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--border-strong);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--surface-muted);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border-color: var(--border);
+    }
+
+    .btn-ghost:hover:not(:disabled) {
+      background: var(--surface-muted);
+      color: var(--text);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .helper-note {
+      margin: 12px 0 0;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Quiz Layout */
+    .quiz-topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .quiz-topbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: var(--surface-muted);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 22px;
+      border: 1px solid var(--border);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 200ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .question-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .question-meta strong {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .question-text {
+      font-size: 18px;
+      line-height: 1.5;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 22px;
+      max-width: 72ch;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-btn {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      text-align: left;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 15px;
+      line-height: 1.5;
+      cursor: pointer;
+      transition: background-color 140ms ease, border-color 140ms ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      background: #f8fafc;
+      border-color: var(--accent);
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-letter {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13.5px;
+      font-weight: 700;
+      background: var(--surface-muted);
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+      margin-top: 1px;
+    }
+
+    .option-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .option-status {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 3px;
+      white-space: nowrap;
+    }
+
+    .option-btn.is-correct {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+      color: var(--success-text);
+    }
+
+    .option-btn.is-correct .option-letter {
+      background: var(--success);
+      border-color: var(--success);
+      color: #ffffff;
+    }
+
+    .option-btn.is-correct .option-status {
+      color: var(--success-text);
+    }
+
+    .option-btn.is-incorrect {
+      background: var(--error-bg);
+      border-color: var(--error-border);
+      color: var(--error-text);
+    }
+
+    .option-btn.is-incorrect .option-letter {
+      background: var(--error);
+      border-color: var(--error);
+      color: #ffffff;
+    }
+
+    .option-btn.is-incorrect .option-status {
+      color: var(--error-text);
+    }
+
+    .option-btn.is-muted {
+      opacity: 0.72;
+    }
+
+    .feedback-box {
+      margin-top: 20px;
+      padding: 18px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .feedback-box.is-correct {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+    }
+
+    .feedback-box.is-incorrect {
+      background: var(--error-bg);
+      border-color: var(--error-border);
+    }
+
+    .feedback-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+
+    .feedback-box.is-correct .feedback-heading {
+      color: var(--success-text);
+    }
+
+    .feedback-box.is-incorrect .feedback-heading {
+      color: var(--error-text);
+    }
+
+    .feedback-explanation {
+      margin: 0;
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .quiz-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Results Screen */
+    .results-header {
+      margin-bottom: 22px;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    @media (max-width: 680px) {
+      .results-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .option-btn {
+        flex-wrap: wrap;
+      }
+      .option-status {
+        width: 100%;
+        padding-left: 44px;
+      }
+    }
+
+    .stat-box {
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .stat-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text);
+    }
+
+    .stat-value.is-success {
+      color: var(--success);
+    }
+
+    .stat-value.is-error {
+      color: var(--error);
+    }
+
+    .stat-value.is-accent {
+      color: var(--accent);
+    }
+
+    .motivation-box {
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+    }
+
+    .motivation-box h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0 0 6px;
+      color: var(--text);
+    }
+
+    .motivation-box p {
+      margin: 0;
+      font-size: 14.5px;
+      color: var(--text-secondary);
+    }
+
+    .results-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+<script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
+<body>
+  <main class="app-shell">
+    <div class="container">
+      <!-- PANTALLA DE INICIO -->
+      <section id="screen-welcome" class="card" aria-labelledby="welcome-title">
+        <div class="welcome-grid">
+          <div>
+            <p class="kicker">Formación y Orientación Laboral · Unidad 4</p>
+            <h1 id="welcome-title">Tema 4: Gestión y organización de la prevención</h1>
+            <p class="lead">
+              Cuestionario interactivo autocorregible con 150 preguntas situacionales sobre gestión preventiva, plan de prevención, evaluación y valoración de riesgos, planificación, modalidades organizativas, representación de los trabajadores y plan de autoprotección.
+            </p>
+            <div class="attribution">Elaboración de Susana Felipe Ortiz con ayuda de la IA</div>
+
+            <h2 class="topic-summary-title">Distribución por epígrafes (150 ítems)</h2>
+            <ul class="topic-list" id="topic-summary-list"></ul>
+          </div>
+
+          <div class="form-panel">
+            <h2>Configura tu práctica</h2>
+            <div class="field">
+              <label class="field-label" for="scope-select">Epígrafe o subepígrafe</label>
+              <select id="scope-select"></select>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="count-select">Número de preguntas</label>
+              <select id="count-select"></select>
+            </div>
+
+            <label class="checkbox-row">
+              <input type="checkbox" id="shuffle-checkbox" />
+              <span>Orden aleatorio de las preguntas (mantiene el orden A–D de opciones)</span>
+            </label>
+
+            <button type="button" id="start-btn" class="btn btn-primary btn-block">
+              Comenzar cuestionario
+            </button>
+            <p class="helper-note" id="scope-availability"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANTALLA DE CUESTIONARIO -->
+      <section id="screen-quiz" class="card hidden" aria-labelledby="quiz-question-text">
+        <div class="quiz-topbar">
+          <div class="quiz-topbar-actions">
+            <button type="button" id="home-btn" class="btn btn-ghost">Volver al inicio</button>
+            <button type="button" id="restart-btn" class="btn btn-secondary">Reiniciar cuestionario</button>
+          </div>
+          <span class="tabular-nums" id="live-score-label" style="font-size: 13.5px; font-weight: 600; color: var(--text-secondary);"></span>
+        </div>
+
+        <div class="progress-meta tabular-nums">
+          <span id="progress-counter">Pregunta 1 de 10</span>
+          <span id="progress-answered">Respondidas: 0 de 10</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-wrap">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+
+        <div class="question-meta">
+          <strong id="question-tema"></strong>
+          <span aria-hidden="true">·</span>
+          <span id="question-subtema"></span>
+        </div>
+
+        <h2 class="question-text" id="quiz-question-text"></h2>
+
+        <div class="options-list" id="options-container"></div>
+
+        <div id="feedback-container" class="feedback-box hidden" aria-live="polite">
+          <div class="feedback-heading" id="feedback-heading"></div>
+          <p class="feedback-explanation" id="feedback-explanation"></p>
+        </div>
+
+        <div class="quiz-footer">
+          <button type="button" id="prev-btn" class="btn btn-secondary">Pregunta anterior</button>
+          <button type="button" id="next-btn" class="btn btn-primary" disabled>Siguiente pregunta</button>
+        </div>
+      </section>
+
+      <!-- PANTALLA DE RESULTADOS -->
+      <section id="screen-results" class="card hidden" aria-labelledby="results-title">
+        <div class="results-header">
+          <p class="kicker" id="results-scope-label"></p>
+          <h1 id="results-title">Resultados del cuestionario</h1>
+        </div>
+
+        <div class="results-grid tabular-nums">
+          <div class="stat-box">
+            <div class="stat-label">Calificación sobre 10</div>
+            <div class="stat-value is-accent" id="res-grade">0,00 / 10</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Aciertos</div>
+            <div class="stat-value is-success" id="res-correct">0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Errores</div>
+            <div class="stat-value is-error" id="res-incorrect">0</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Porcentaje de acierto</div>
+            <div class="stat-value" id="res-percent">0 %</div>
+          </div>
+        </div>
+
+        <div class="motivation-box">
+          <h3 id="res-motivation-title"></h3>
+          <p id="res-motivation-message"></p>
+        </div>
+
+        <div class="results-actions">
+          <button type="button" id="retry-incorrect-btn" class="btn btn-primary hidden">Repetir incorrectas</button>
+          <button type="button" id="repeat-btn" class="btn btn-primary">Repetir cuestionario</button>
+          <button type="button" id="choose-topic-btn" class="btn btn-secondary">Elegir otro epígrafe</button>
+          <button type="button" id="results-home-btn" class="btn btn-ghost">Volver al inicio</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const TEMAS_CATALOGO = [{"id":"tema-1","nombre":"Epígrafe 1. La gestión preventiva en la empresa","subtemas":[{"id":"1.1","nombre":"1.1. Finalidad e integración de la prevención (art. 16.1 LPRL)"},{"id":"1.2","nombre":"1.2. Elementos básicos del sistema de gestión preventiva"},{"id":"1.3","nombre":"1.3. Perspectiva de género y trabajadores autónomos"}]},{"id":"tema-2","nombre":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemas":[{"id":"2.1","nombre":"2.1. Concepto y contenido obligatorio del plan de prevención"},{"id":"2.2","nombre":"2.2. Instrumentos esenciales y seguimiento del plan"}]},{"id":"tema-3","nombre":"Epígrafe 3. Evaluación de riesgos","subtemas":[{"id":"3.1","nombre":"3.1. Concepto, revisión y documentación de la evaluación"},{"id":"3.2","nombre":"3.2. Peligro vs. riesgo y etapas iniciales (análisis y estimación)"},{"id":"3.3","nombre":"3.3. Valoración del riesgo según el método INSST (T, TO, MO, I, IN)"},{"id":"3.4","nombre":"3.4. Priorización de la actuación preventiva"}]},{"id":"tema-4","nombre":"Epígrafe 4. Planificación de la acción preventiva","subtemas":[{"id":"4.1","nombre":"4.1. Contenido, prioridades, plazos y modificación de la planificación"},{"id":"4.2","nombre":"4.2. Control de eficacia, riesgo grave e inminente y Anexo I"}]},{"id":"tema-5","nombre":"Epígrafe 5. La organización de la acción preventiva","subtemas":[{"id":"5.1","nombre":"5.1. Criterios generales y asunción personal por el empresario"},{"id":"5.2","nombre":"5.2. Designación de trabajadores"},{"id":"5.3","nombre":"5.3. Servicio de prevención propio (SPP)"},{"id":"5.4","nombre":"5.4. Servicio de prevención ajeno (SPA) y auditoría"},{"id":"5.5","nombre":"5.5. Servicio de prevención mancomunado, vigilancia de la salud y mutuas"}]},{"id":"tema-6","nombre":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemas":[{"id":"6.1","nombre":"6.1. Delegados de prevención: elección, número y competencias"},{"id":"6.2","nombre":"6.2. Garantías de los delegados de prevención y crédito horario"},{"id":"6.3","nombre":"6.3. Comité de seguridad y salud: naturaleza, composición y competencias"}]},{"id":"tema-7","nombre":"Epígrafe 7. Plan de autoprotección","subtemas":[{"id":"7.1","nombre":"7.1. Plan de autoprotección: concepto y contenido mínimo (RD 393/2007)"},{"id":"7.2","nombre":"7.2. Plan de actuación ante emergencias y clasificación de emergencias"},{"id":"7.3","nombre":"7.3. Estructura organizativa ante emergencias (equipos y jefe/centro)"},{"id":"7.4","nombre":"7.4. Plan de evacuación, simulacros y señalización/comunicaciones"}]}];
+      const QUESTIONS = [{"id":1,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.1","subtema":"1.1. Finalidad e integración de la prevención (art. 16.1 LPRL)","enunciado":"En una empresa de logística, la dirección decide crear un departamento paralelo que redacta normas de seguridad sin coordinarse con los jefes de almacén ni modificar los ritmos de carga. Según el artículo 16.1 de la LPRL, ¿qué principio fundamental de la gestión preventiva se está incumpliendo?","opciones":{"A":"La prioridad de externalizar todas las tareas técnicas mediante un concierto preventivo.","B":"La integración de la prevención en una gestión única dentro de toda la actividad empresarial.","C":"La delegación exclusiva de la seguridad laboral en los representantes de los trabajadores.","D":"La separación administrativa entre los procedimientos productivos y la vigilancia médica."},"correcta":"B","explicacion":"El artículo 16.1 de la LPRL exige integrar la prevención en el conjunto de actividades y niveles jerárquicos mediante una gestión única, evitando duplicidades entre la gestión productiva y la preventiva. Las demás opciones contradicen ese principio integrador o confunden responsabilidades legales."},{"id":2,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.1","subtema":"1.1. Finalidad e integración de la prevención (art. 16.1 LPRL)","enunciado":"La dirección de un taller mecánico solo revisa las máquinas y la ventilación del local, pero asigna tareas de soldadura compleja a personal recién incorporado sin comprobar su formación previa ni sus capacidades. Desde la óptica de la gestión única de la actividad, ¿qué aspecto está desatendiendo?","opciones":{"A":"La contratación obligatoria de una mutua colaboradora para tareas de prevención.","B":"La elaboración de un mapa de evacuación aprobado por la inspección laboral.","C":"El control económico de las inversiones realizadas durante el último ejercicio fiscal.","D":"La atención a las condiciones del trabajador que repercuten en su seguridad y salud."},"correcta":"D","explicacion":"Una gestión preventiva única debe atender tanto a las condiciones de trabajo (locales, instalaciones, equipos, ambiente, procedimientos) como a las condiciones del trabajador (características personales, conocimientos y habilidades). Ignorar la preparación del operario vulnera este segundo bloque."},{"id":3,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.1","subtema":"1.1. Finalidad e integración de la prevención (art. 16.1 LPRL)","enunciado":"Un encargado de producción ordena retirar temporalmente el resguardo de una prensa para entregar un pedido urgente, argumentando que la seguridad corresponde únicamente al técnico de prevención. ¿Qué implica realmente la integración en todos los niveles jerárquicos?","opciones":{"A":"Que cualquier mando intermedio debe incluir la prevención en cada actividad y decisión que adopte.","B":"Que los mandos intermedios solo aplican medidas preventivas cuando lo solicita la plantilla.","C":"Que la dirección asume en solitario las decisiones técnicas sin consultar a los mandos de planta.","D":"Que los objetivos productivos prevalecen sobre la seguridad cuando existen plazos urgentes."},"correcta":"A","explicacion":"La integración en todos los niveles jerárquicos atribuye a cada responsable la obligación de incorporar la prevención en cualquier actividad que gestione y en todas sus decisiones. No es una tarea aislada del servicio técnico ni subordinada a la urgencia productiva."},{"id":4,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.1","subtema":"1.1. Finalidad e integración de la prevención (art. 16.1 LPRL)","enunciado":"Una empresa comercial duda sobre si implantar un sistema de gestión preventiva integrado porque lo percibe únicamente como un gasto administrativo sin retorno. ¿Qué argumento refleja mejor la finalidad de la prevención según el texto estudiado?","opciones":{"A":"Sustituye la responsabilidad empresarial por sanciones directas a los operarios imprudentes.","B":"Elimina por completo cualquier revisión médica periódica en los puestos administrativos.","C":"Evita accidentes y enfermedades profesionales que reducen la productividad y la competitividad.","D":"Permite reducir la jornada laboral ordinaria sin necesidad de reorganizar los turnos de trabajo."},"correcta":"C","explicacion":"La prevención protege al trabajador evitando accidentes y enfermedades profesionales, lo que a su vez evita sufrimiento humano, incremento de costes, descenso de la productividad y pérdida de competitividad empresarial."},{"id":5,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.1","subtema":"1.1. Finalidad e integración de la prevención (art. 16.1 LPRL)","enunciado":"¿Qué requisito previo resulta indispensable para que el sistema de gestión preventiva no quede reducido a un documento meramente formal dentro de la empresa?","opciones":{"A":"La publicación trimestral de los historiales médicos individuales en el tablón del centro.","B":"El convencimiento de la dirección sobre sus beneficios y el fomento de una cultura preventiva.","C":"La sustitución del plan de prevención por instrucciones verbales adaptadas a cada jornada.","D":"La transferencia de la autoridad sancionadora a los equipos de primera intervención."},"correcta":"B","explicacion":"El documento destaca que, para lograr una integración real, es indispensable que la dirección esté convencida de los beneficios de la prevención y promueva una cultura preventiva con implicación efectiva propia y de toda la plantilla."},{"id":6,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.1","subtema":"1.1. Finalidad e integración de la prevención (art. 16.1 LPRL)","enunciado":"En una empresa alimentaria, al rediseñar una línea de envasado, el equipo de ingeniería modifica el procedimiento de limpieza química y la iluminación del área. ¿A qué ámbito de la gestión única pertenecen estos cambios?","opciones":{"A":"Al ámbito de las condiciones materiales y ambientales en que se desarrolla el trabajo.","B":"Al ámbito de las aptitudes personales, formación y destreza previa de cada operario.","C":"Al ámbito de la representación colectiva y participación periódica en el comité.","D":"Al ámbito de la vigilancia sanitaria periódica y control médico de la plantilla."},"correcta":"A","explicacion":"Las condiciones de trabajo comprenden los locales, instalaciones, equipos, ambiente laboral y procedimiento de realización de la actividad. Las características personales, conocimientos y habilidades pertenecen a las condiciones del trabajador."},{"id":7,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.2","subtema":"1.2. Elementos básicos del sistema de gestión preventiva","enunciado":"Una dirección redacta un documento en el que fija los principios preventivos de la empresa, las metas anuales y el compromiso de dotar recursos humanos y materiales suficientes. ¿Qué elemento básico del sistema de gestión está definiendo?","opciones":{"A":"El control posterior de las desviaciones producidas durante el ciclo productivo.","B":"La ejecución directa de las medidas correctoras sobre los equipos de trabajo.","C":"La organización de la modalidad preventiva prevista en el reglamento vigente.","D":"La política de prevención que orientará toda la acción preventiva de la empresa."},"correcta":"D","explicacion":"La política de prevención marca los principios rectores, los objetivos en un periodo determinado y el compromiso de asignar recursos humanos y materiales suficientes. La organización, ejecución y control corresponden a fases posteriores del ciclo."},{"id":8,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.2","subtema":"1.2. Elementos básicos del sistema de gestión preventiva","enunciado":"Tras evaluar los puestos de una carpintería, la empresa establece plazos para instalar extractores de serrín y designa qué personas llevarán a cabo cada tarea con el presupuesto asignado. ¿En qué dos elementos del sistema se enmarcan respectivamente definir acciones y ponerlas en marcha con esas personas y medios?","opciones":{"A":"Política preventiva y auditoría reglamentaria de riesgos laborales.","B":"Evaluación de daños y consulta previa a la autoridad laboral competente.","C":"Planificación de la actividad preventiva y ejecución de las acciones previstas.","D":"Organización de la producción y notificación de accidentes al servicio médico."},"correcta":"C","explicacion":"La planificación establece acciones a partir de la evaluación inicial para eliminar o reducir riesgos, mientras que la ejecución consiste en llevar a cabo esas acciones mediante las personas señaladas en la organización y con los medios previstos."},{"id":9,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.2","subtema":"1.2. Elementos básicos del sistema de gestión preventiva","enunciado":"Al revisar los resultados del año, el responsable de una clínica comprueba que no se han alcanzado los objetivos de reducción de sobreesfuerzos fijados en enero. Según el ciclo del sistema de gestión preventiva, ¿qué corresponde hacer en la fase de control?","opciones":{"A":"Analizar las causas del incumplimiento y modificar la estrategia para reiniciar el ciclo.","B":"Archivar el plan anterior y esperar a que expire la validez de la evaluación inicial.","C":"Trasladar automáticamente la gestión preventiva a una empresa de trabajo temporal.","D":"Eliminar las metas cuantitativas para evitar nuevas desviaciones en el futuro."},"correcta":"A","explicacion":"La fase de control comprueba si las actividades se desarrollaron según lo planificado y si se lograron los objetivos; en caso negativo, analiza las causas que lo impidieron y modifica la estrategia para comenzar de nuevo el ciclo."},{"id":10,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.2","subtema":"1.2. Elementos básicos del sistema de gestión preventiva","enunciado":"Una empresa mantiene exactamente las mismas medidas de seguridad desde hace diez años, aunque ha incorporado nueva maquinaria automatizada, alegando que nunca ha sufrido accidentes graves. ¿Qué objetivo específico de la política preventiva está olvidando?","opciones":{"A":"La concentración exclusiva de la prevención en los puestos de mayor antigüedad.","B":"La sustitución automática de los delegados de prevención por técnicos externos.","C":"La limitación del presupuesto preventivo a las sanciones impuestas por inspección.","D":"La mejora continua mediante una acción permanente para perfeccionar la protección."},"correcta":"D","explicacion":"Dentro de los objetivos de la política preventiva figura la mejora continua, entendida como una acción permanente orientada a perfeccionar los niveles de protección existentes, con independencia de que no hayan ocurrido accidentes previos."},{"id":11,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.2","subtema":"1.2. Elementos básicos del sistema de gestión preventiva","enunciado":"¿Cuál de las siguientes secuencias ordena correctamente los elementos básicos del sistema de gestión de la prevención desde la fijación de principios hasta la verificación de resultados?","opciones":{"A":"Ejecución, política de prevención, planificación, control y organización.","B":"Planificación, organización, política de prevención, ejecución y control.","C":"Política de prevención, organización, planificación, ejecución y control.","D":"Organización, control, planificación, política de prevención y ejecución."},"correcta":"C","explicacion":"El sistema integrado parte de la política de prevención, define la organización conforme al Reglamento de los Servicios de Prevención, realiza la planificación desde la evaluación inicial, procede a la ejecución y cierra con el control."},{"id":12,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.2","subtema":"1.2. Elementos básicos del sistema de gestión preventiva","enunciado":"En el marco de la política de prevención, además de la mejora continua, ¿qué otro objetivo esencial debe guiar las actuaciones empresariales?","opciones":{"A":"La integración de la actividad preventiva en el conjunto de actividades y decisiones.","B":"La externalización completa de las inspecciones internas hacia empresas del mismo edificio.","C":"La reducción progresiva de los reconocimientos médicos para trabajadores temporales.","D":"La unificación de los turnos laborales para suprimir los comités de seguridad."},"correcta":"A","explicacion":"El documento señala explícitamente dos objetivos dentro de la política preventiva: la mejora continua (para perfeccionar los niveles de protección) y la integración de la actividad preventiva en el conjunto de actividades y decisiones de la empresa."},{"id":13,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.3","subtema":"1.3. Perspectiva de género y trabajadores autónomos","enunciado":"En una empresa del sector químico, al evaluar los puestos ocupados mayoritariamente por mujeres en laboratorio y por hombres en mantenimiento, la dirección aplica criterios idénticos sin considerar exposiciones diferenciadas ni situaciones de embarazo. ¿Qué aspecto está omitiendo?","opciones":{"A":"La prohibición legal de contratar personal femenino en puestos con agentes químicos.","B":"La obligación de asignar distintos delegados sindicales según la categoría profesional.","C":"La exención de evaluar riesgos ergonómicos cuando predominan contratos indefinidos.","D":"La incorporación de la perspectiva de género en la gestión integral de la prevención."},"correcta":"D","explicacion":"El sistema integral de PRL debe incorporar la perspectiva de género porque los riesgos y patologías afectan de forma desigual a hombres y mujeres debido a diferencias biológicas (especialmente embarazo y lactancia) y a la segregación laboral."},{"id":14,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.3","subtema":"1.3. Perspectiva de género y trabajadores autónomos","enunciado":"Dentro de una gran empresa tecnológica, apenas hay mujeres en los comités donde se aprueban las políticas y recursos preventivos, a pesar de representar la mitad de la plantilla técnica. ¿A qué factor de desigualdad descrito en el tema responde esta situación?","opciones":{"A":"A la segregación horizontal que concentra a cada sexo en ramas productivas distintas.","B":"A la segregación vertical o techo de cristal en el ascenso profesional dentro de la empresa.","C":"A las diferencias biológicas vinculadas específicamente a los periodos de gestación y lactancia.","D":"A la mayor incidencia de las enfermedades profesionales en puestos de trabajo manuales."},"correcta":"B","explicacion":"La segregación vertical o «techo de cristal» es la barrera invisible que impide a las mujeres acceder a puestos de alta dirección. Por su parte, la segregación horizontal se refiere a la concentración en distintos sectores y actividades."},{"id":15,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.3","subtema":"1.3. Perspectiva de género y trabajadores autónomos","enunciado":"Cuando una evaluación preventiva analiza por qué ciertas patologías musculoesqueléticas afectan más a trabajadoras de limpieza y ciertos accidentes traumáticos a operarios de construcción, ¿qué factor explicativo de la perspectiva de género se pone de manifiesto?","opciones":{"A":"La ausencia de normativa preventiva aplicable a las empresas de servicios auxiliares.","B":"La obligación de aplicar métodos distintos de valoración según la edad del trabajador.","C":"La segregación horizontal del mercado de trabajo entre sectores y actividades.","D":"La imposibilidad técnica de adoptar medidas colectivas en empresas subcontratadas."},"correcta":"C","explicacion":"La segregación horizontal provoca que mujeres y hombres se concentren en distintos sectores y actividades, exponiéndolos a riesgos laborales y patologías diferentes que deben considerarse en la gestión preventiva."},{"id":16,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.3","subtema":"1.3. Perspectiva de género y trabajadores autónomos","enunciado":"Una diseñadora gráfica trabaja como autónoma desde su estudio particular, no tiene empleados a su cargo y no comparte local con ninguna otra empresa. ¿Qué obligación tiene respecto a la gestión preventiva?","opciones":{"A":"Está obligada a constituir un servicio de prevención propio antes de iniciar su actividad.","B":"Debe contratar un servicio de prevención ajeno que audite su vivienda cada cinco años.","C":"Tiene que designar a un trabajador externo para vigilar el cumplimiento de la normativa.","D":"Queda exceptuada de disponer de una organización preventiva para gestionar riesgos laborales."},"correcta":"D","explicacion":"Los autónomos están obligados a gestionar la PRL como las demás empresas, salvo los trabajadores por cuenta propia sin empleados a su cargo que no compartan centro de trabajo con ninguna otra empresa."},{"id":17,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.3","subtema":"1.3. Perspectiva de género y trabajadores autónomos","enunciado":"Un electricista autónomo sin empleados a su cargo realiza una reparación en una nave industrial donde operan simultáneamente operarios contratados por otras dos compañías. ¿Qué actuación preventiva le resulta exigible en esa situación?","opciones":{"A":"Asumir la dirección del plan de evacuación general de todas las firmas del polígono.","B":"Quedar dispensado de todo deber informativo por carecer de plantilla asalariada.","C":"Aportar información sobre los riesgos de su actividad que puedan afectar a terceros presentes.","D":"Someter su equipamiento portátil a una auditoría quinquenal ordenada por el comité local."},"correcta":"C","explicacion":"Aunque un autónomo sin empleados no está obligado a organizar la PRL de su negocio cuando trabaja aislado, si comparte espacio con personal de otras empresas debe informar sobre los riesgos de su actividad que puedan suponer un peligro para los demás."},{"id":18,"temaId":"tema-1","tema":"Epígrafe 1. La gestión preventiva en la empresa","subtemaId":"1.3","subtema":"1.3. Perspectiva de género y trabajadores autónomos","enunciado":"Un fontanero autónomo contrata a dos oficiales para ampliar su negocio en un pequeño taller. A partir de ese momento, respecto a la prevención de riesgos laborales, ¿cuál es su situación jurídica?","opciones":{"A":"Debe gestionar la prevención de riesgos laborales en su negocio como el resto de empresas.","B":"Sigue exento de toda obligación preventiva porque es una persona física con menos de cinco operarios.","C":"Únicamente debe entregar equipos de protección si trabaja junto a otras empresas ajenas.","D":"Solo está obligado a redactar un plan de autoprotección si supera los veinticinco trabajadores."},"correcta":"A","explicacion":"La excepción únicamente alcanza a los trabajadores por cuenta propia sin empleados a su cargo que no compartan centro de trabajo. Al tener dos trabajadores contratados, está obligado a gestionar la PRL como cualquier empresa."},{"id":19,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.1","subtema":"2.1. Concepto y contenido obligatorio del plan de prevención","enunciado":"En una revisión interna se detecta que el plan de prevención de riesgos laborales de una fábrica fue redactado por un consultor externo, pero la gerencia nunca llegó a formalizar su visto bueno. ¿Por qué es irregular esta situación?","opciones":{"A":"Porque el documento solo adquiere validez cuando lo suscriben por unanimidad los delegados sindicales.","B":"Porque la validación corresponde exclusivamente a la mutua colaboradora con la Seguridad Social.","C":"Porque el texto debe contar con la aprobación expresa de la dirección de la empresa.","D":"Porque únicamente la autoridad laboral puede aprobar la política preventiva de cada empresa."},"correcta":"C","explicacion":"El plan de prevención es la herramienta que integra la actividad preventiva en el sistema general de gestión y establece la política preventiva, por lo que debe recogerse en un documento aprobado por la dirección de la empresa."},{"id":20,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.1","subtema":"2.1. Concepto y contenido obligatorio del plan de prevención","enunciado":"Al revisar el plan de prevención de una cadena comercial, falta la indicación de la plantilla total, los rasgos de cada establecimiento y su ramo de negocio. ¿Qué bloque obligatorio del plan se ha omitido?","opciones":{"A":"La organización productiva referida a prácticas y procedimientos técnicos internos.","B":"La identificación de la empresa, sus centros de trabajo y su actividad productiva.","C":"La estructura jerárquica encargada de asignar funciones preventivas a cada mando.","D":"La organización preventiva que detalla la modalidad elegida y los órganos existentes."},"correcta":"B","explicacion":"El apartado de identificación de la empresa debe recoger precisamente la actividad productiva, las características de los centros de trabajo y el número de trabajadores."},{"id":21,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.1","subtema":"2.1. Concepto y contenido obligatorio del plan de prevención","enunciado":"Una empresa constructora detalla en su plan de prevención qué responsabilidades preventivas corresponden a los jefes de obra, a los encargados y a la gerencia. ¿Qué elemento obligatorio del documento está desarrollando?","opciones":{"A":"Los procesos técnicos y las prácticas operativas de la organización productiva.","B":"La política, los objetivos y las metas económicas fijadas para el ejercicio anual.","C":"La identificación geográfica del emplazamiento y los titulares de la actividad.","D":"La estructura organizativa de la empresa en relación con la prevención de riesgos."},"correcta":"D","explicacion":"La estructura organizativa de la empresa dentro del plan de prevención especifica las funciones y responsabilidades que asume cada nivel jerárquico en relación con la prevención de riesgos laborales."},{"id":22,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.1","subtema":"2.1. Concepto y contenido obligatorio del plan de prevención","enunciado":"En el plan de prevención de una imprenta se describen las máquinas empleadas, los procedimientos de trabajo seguro y las prácticas habituales en cada fase de producción. ¿A qué apartado obligatorio del plan corresponden estos contenidos?","opciones":{"A":"A la organización de la prevención y la designación de los representantes legales.","B":"A la estructura organizativa jerárquica y la asignación de crédito horario retribuido.","C":"A la organización de la producción en relación con la prevención de riesgos laborales.","D":"A la identificación del número de centros de trabajo y la plantilla total contratada."},"correcta":"C","explicacion":"La organización de la producción recoge los procesos técnicos, las prácticas y los procedimientos de la empresa en relación con la prevención de riesgos laborales."},{"id":23,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.1","subtema":"2.1. Concepto y contenido obligatorio del plan de prevención","enunciado":"¿Qué información concreta debe figurar en el apartado relativo a la organización de la prevención dentro del plan de prevención de riesgos laborales?","opciones":{"A":"El listado detallado de los accidentes leves ocurridos en los últimos cinco años.","B":"El código numérico de cada riesgo laboral según la clasificación oficial del INSST.","C":"Los teléfonos de emergencia externos y la ubicación de los puntos de reunión seguros.","D":"La modalidad preventiva elegida por la empresa y los órganos de representación existentes."},"correcta":"D","explicacion":"El apartado de organización de la prevención en la empresa debe indicar expresamente la modalidad preventiva elegida (empresario, trabajadores designados, SPP, SPA o mancomunado) y los órganos de representación existentes (delegados de prevención y comité de seguridad y salud)."},{"id":24,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.1","subtema":"2.1. Concepto y contenido obligatorio del plan de prevención","enunciado":"Una empresa incluye en su plan de prevención los objetivos preventivos para los próximos dos años, pero omite especificar los medios económicos, técnicos, materiales y humanos para alcanzarlos. ¿Es completo ese apartado?","opciones":{"A":"No, porque junto a la política y metas deben constar los recursos asignados para lograrlas.","B":"Sí, porque la dotación de medios se concreta posteriormente al elaborar la memoria anual.","C":"Sí, porque los recursos económicos solo se detallan en el plan de autoprotección del centro.","D":"No, porque primero debe aprobar el comité paritario el desglose financiero de cada puesto."},"correcta":"A","explicacion":"El quinto elemento obligatorio del plan comprende la política, los objetivos y metas en materia preventiva, así como los recursos humanos, técnicos, materiales y económicos necesarios para cumplirlos."},{"id":25,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.1","subtema":"2.1. Concepto y contenido obligatorio del plan de prevención","enunciado":"Una clínica dental confunde el plan de prevención con el plan de autoprotección y presenta únicamente un protocolo de incendios y primeros auxilios como si cumpliera con el artículo 16.1 de la LPRL. ¿Cuál es la diferencia esencial?","opciones":{"A":"El plan de prevención es exclusivo de industrias peligrosas y el de autoprotección de oficinas.","B":"El plan de autoprotección integra la gestión global de la empresa y el de prevención solo evacua.","C":"El plan de prevención solo rige durante emergencias y el de autoprotección en jornada ordinaria.","D":"El plan de prevención integra la actividad en la gestión global y el de autoprotección regula emergencias."},"correcta":"D","explicacion":"El plan de prevención es la herramienta global mediante la cual se integra la actividad preventiva en el sistema general de gestión de la empresa y se fija su política; el plan de autoprotección aborda riesgos y protocolos específicos ante emergencias."},{"id":26,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.1","subtema":"2.1. Concepto y contenido obligatorio del plan de prevención","enunciado":"Una empresa de servicios ha redactado un documento muy extenso con los objetivos preventivos y la descripción de sus procesos técnicos, pero no menciona quién asume la actividad preventiva ni cuántos trabajadores tiene cada sede. ¿Qué dos elementos del plan faltan?","opciones":{"A":"La evaluación inicial de cada puesto y los simulacros anuales de emergencia parcial.","B":"La organización de la prevención en la empresa y la identificación de la empresa.","C":"La política preventiva de mejora continua y el programa de mantenimiento de instalaciones.","D":"El análisis de riesgos mediante cuestionario y el orden de prioridades de actuación."},"correcta":"B","explicacion":"El número de trabajadores y las características de los centros pertenecen a la identificación de la empresa, mientras que indicar quién ejerce la modalidad preventiva corresponde a la organización de la prevención en la empresa."},{"id":27,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.1","subtema":"2.1. Concepto y contenido obligatorio del plan de prevención","enunciado":"Cuando se afirma que el plan de prevención establece la política preventiva de la empresa y la integra en su sistema general de gestión, ¿qué consecuencia práctica tiene para la organización?","opciones":{"A":"Que la prevención se gestiona de forma transversal en procesos, mandos y recursos habituales.","B":"Que los mandos intermedios dejan de participar en decisiones relacionadas con la seguridad.","C":"Que la empresa queda dispensada de realizar evaluaciones de riesgos en puestos administrativos.","D":"Que los trabajadores deciden individualmente las medidas preventivas aplicables a su puesto."},"correcta":"A","explicacion":"Integrar la prevención en la gestión general implica que atraviesa todos los procesos productivos, niveles jerárquicos y asignación de recursos, evitando que funcione como un departamento aislado de la actividad real."},{"id":28,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.2","subtema":"2.2. Instrumentos esenciales y seguimiento del plan","enunciado":"Un gerente pregunta a su asesor qué dos herramientas operativas permiten aplicar y hacer efectivo en la práctica el plan de prevención de riesgos laborales ya aprobado. ¿Cuál es la respuesta correcta?","opciones":{"A":"La auditoría quinquenal del sistema y la designación de delegados sindicales.","B":"El reglamento de régimen interno y el cuadrante de reconocimientos médicos.","C":"El mapa de evacuación del edificio y el registro de accidentes sin baja médica.","D":"La evaluación de riesgos y la planificación de la acción preventiva."},"correcta":"D","explicacion":"El documento señala expresamente que los instrumentos esenciales para llevar a cabo la gestión y aplicación del plan de prevención son la evaluación de riesgos y la planificación de la acción preventiva."},{"id":29,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.2","subtema":"2.2. Instrumentos esenciales y seguimiento del plan","enunciado":"En el seguimiento periódico del plan de prevención de una fábrica textil se detecta que, pese a las medidas aplicadas, la exposición al ruido no disminuye y aumentan las molestias auditivas en la plantilla. ¿Qué debe hacerse según el documento?","opciones":{"A":"Mantener el plan intacto hasta completar el ciclo quinquenal de auditoría externa.","B":"Limitar el seguimiento únicamente al registro contable de los equipos adquiridos.","C":"Sustituir el plan de prevención por un cuestionario anual de satisfacción laboral.","D":"Corregir los planes de actuación al no haberse constatado la eficacia prevista."},"correcta":"D","explicacion":"El plan de prevención debe someterse periódicamente a seguimiento, control y evaluación para comprobar la disminución de la exposición y la mejora de la salud (eficacia); en caso contrario, deben corregirse los planes de actuación."},{"id":30,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.2","subtema":"2.2. Instrumentos esenciales y seguimiento del plan","enunciado":"¿Qué dos indicadores concretos permiten constatar la eficacia del plan de prevención durante su seguimiento y control periódico?","opciones":{"A":"La reducción del número de inspecciones oficiales y el ahorro en equipos de protección.","B":"La disminución de la exposición a los riesgos y la mejora del estado de salud del personal.","C":"El aumento de la velocidad de producción y la ausencia de reuniones del comité de empresa.","D":"La renovación anual de los contratos temporales y la contratación de una mutua laboral."},"correcta":"B","explicacion":"El seguimiento y control del plan busca constatar la disminución de la exposición a los riesgos y la mejora del estado de salud de los trabajadores expuestos, indicadores reales de su eficacia preventiva."},{"id":31,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.2","subtema":"2.2. Instrumentos esenciales y seguimiento del plan","enunciado":"Una empresa elabora su plan de prevención en enero, pero nunca realiza la evaluación de riesgos ni planifica medidas concretas porque considera que el documento aprobado ya cumple toda la obligación legal. ¿Por qué es erróneo ese planteamiento?","opciones":{"A":"Porque sin evaluar riesgos ni planificar medidas faltan los instrumentos básicos para aplicarlo.","B":"Porque el plan carece de eficacia hasta que se aprueba también un plan de evacuación exterior.","C":"Porque la normativa exige además someter el documento a una auditoría previa del inspector.","D":"Porque el plan de prevención debe renovarse trimestralmente mediante acuerdo del comité."},"correcta":"A","explicacion":"Aprobar el plan de prevención es solo el marco inicial; su gestión y aplicación efectiva requieren necesariamente sus dos instrumentos esenciales: la evaluación de riesgos y la planificación de la acción preventiva."},{"id":32,"temaId":"tema-2","tema":"Epígrafe 2. El plan de prevención de riesgos laborales","subtemaId":"2.2","subtema":"2.2. Instrumentos esenciales y seguimiento del plan","enunciado":"Durante la revisión trimestral de una empresa de mensajería se observa que el plan de prevención no contempla un nuevo servicio de reparto en furgoneta eléctrica implantado hace dos meses. ¿Qué relación existe entre este cambio y el seguimiento del plan?","opciones":{"A":"Mantiene el plan inalterable hasta que la dirección apruebe el siguiente presupuesto anual.","B":"Implica actualizar el teléfono de emergencias en el cuadro del centro de comunicaciones.","C":"Exige revisar los instrumentos de gestión para adaptar los planes de actuación a la realidad.","D":"Afecta a la convocatoria extraordinaria de elecciones sindicales en el centro de trabajo."},"correcta":"C","explicacion":"El seguimiento y control continuo del sistema exige detectar cambios y comprobar si las actuaciones protegen eficazmente la salud; ante nuevas condiciones o falta de eficacia, deben actualizarse las evaluaciones y corregir los planes de actuación."},{"id":33,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.1","subtema":"3.1. Concepto, revisión y documentación de la evaluación","enunciado":"Una empresa metalúrgica inicia sus actividades y decide evaluar únicamente los puestos del taller de soldadura, dejando fuera las oficinas administrativas por considerarlas seguras. ¿Cumple con los requisitos de la evaluación inicial de riesgos?","opciones":{"A":"Sí, siempre que el empresario firme una declaración asumiendo la seguridad de las oficinas.","B":"No, porque la evaluación debe abarcar todos los puestos de trabajo de la empresa.","C":"Sí, porque la normativa limita la evaluación inicial a las actividades de especial peligrosidad.","D":"No, salvo que los trabajadores administrativos rechacen voluntariamente la evaluación médica."},"correcta":"B","explicacion":"El proceso de evaluación de riesgos debe abarcar todos los puestos de trabajo, teniendo en cuenta la naturaleza de la actividad, las características de los puestos y las de los trabajadores que deban desempeñarlos."},{"id":34,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.1","subtema":"3.1. Concepto, revisión y documentación de la evaluación","enunciado":"En una empresa de artes gráficas se instala una nueva guillotina automática que modifica el procedimiento de corte utilizado hasta entonces. ¿Qué obligación surge respecto a la evaluación de riesgos realizada el año anterior?","opciones":{"A":"Esperar cinco años hasta que corresponda pasar la auditoría reglamentaria del sistema.","B":"Mantener la evaluación anterior y añadir únicamente una nota en el contrato de compra.","C":"Limitar la revisión a comprobar si el fabricante cuenta con un servicio de prevención propio.","D":"Revisar la evaluación de riesgos al haberse introducido cambios en las condiciones de trabajo."},"correcta":"D","explicacion":"La evaluación de riesgos debe revisarse siempre que se introduzcan cambios en las condiciones de trabajo, se aprecie que las medidas adoptadas son insuficientes o exista una periodicidad legal en actividades de especial peligrosidad."},{"id":35,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.1","subtema":"3.1. Concepto, revisión y documentación de la evaluación","enunciado":"Una clínica veterinaria realiza una evaluación inicial sin haber solicitado el parecer del comité ni de los delegados del personal y además encarga la tarea a un auxiliar administrativo sin cualificación preventiva. ¿Qué dos requisitos legales vulnera?","opciones":{"A":"La obligación de emplear el método William Fine y remitir la ficha técnica a la mutua.","B":"La intervención de personal competente y la audiencia previa de la representación laboral.","C":"La autorización previa de la asamblea general y la firma del inspector de trabajo local.","D":"La aprobación trimestral por el consejo directivo y el registro en el plan de evacuación."},"correcta":"B","explicacion":"El proceso de evaluación debe llevarse a cabo por personas competentes en prevención de riesgos y previa consulta a los representantes de los trabajadores."},{"id":36,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.1","subtema":"3.1. Concepto, revisión y documentación de la evaluación","enunciado":"Al revisar la carpeta de prevención de una empresa se comprueba que el documento de evaluación incluye los riesgos existentes y las medidas preventivas, pero omite qué trabajadores están afectados y qué método de análisis se empleó. ¿Es suficiente esa documentación?","opciones":{"A":"Sí, porque identificar los riesgos y las medidas basta para acreditar la evaluación legal.","B":"Sí, siempre que conste la fecha de la última revisión médica voluntaria de la plantilla.","C":"No, porque debe constar también el puesto evaluado, los afectados, criterios y métodos usados.","D":"No, porque la evaluación debe redactarse exclusivamente mediante actas de inspección externa."},"correcta":"C","explicacion":"La documentación de la evaluación debe indicar el puesto de trabajo evaluado, los riesgos existentes, los trabajadores afectados, las medidas preventivas procedentes, así como los criterios, procedimientos de evaluación y métodos de medición y análisis utilizados."},{"id":37,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.1","subtema":"3.1. Concepto, revisión y documentación de la evaluación","enunciado":"Un técnico debe evaluar un riesgo específico para el cual no existe una normativa legal concreta de medición en España. De acuerdo con el tema estudiado, ¿a qué fuentes técnicas es recomendable recurrir?","opciones":{"A":"A las normas UNE o a las guías técnicas del Instituto Nacional de Seguridad y Salud.","B":"A las tablas de baremación propias de las mutuas colaboradoras con la Seguridad Social.","C":"A los protocolos internos acordados por el comité paritario en su reunión trimestral.","D":"A los manuales comerciales facilitados por los proveedores de equipos de protección."},"correcta":"A","explicacion":"Cuando no exista normativa legal específica, se recomienda recurrir a las normas UNE o a las guías del Instituto Nacional de Seguridad y Salud en el Trabajo (INSST)."},{"id":38,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.1","subtema":"3.1. Concepto, revisión y documentación de la evaluación","enunciado":"En un almacén frigorífico se han registrado varios resbalones repetidos en la zona de carga pese a haberse implantado calzado antideslizante tras la evaluación inicial. ¿Por qué debe revisarse la evaluación de riesgos?","opciones":{"A":"Porque cualquier accidente leve exige cambiar obligatoriamente de servicio de prevención ajeno.","B":"Porque la ley prohíbe mantener las mismas medidas preventivas más de seis meses seguidos.","C":"Porque debe solicitarse al juzgado laboral una nueva clasificación del centro de trabajo.","D":"Porque los accidentes repetidos indican que las medidas adoptadas resultan insuficientes."},"correcta":"D","explicacion":"Uno de los tres supuestos obligatorios de revisión de la evaluación es apreciar que las medidas de prevención adoptadas son insuficientes, además de los cambios en las condiciones de trabajo y la periodicidad legal en actividades peligrosas."},{"id":39,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.1","subtema":"3.1. Concepto, revisión y documentación de la evaluación","enunciado":"Al asignar un puesto de laboratorio a una persona con sensibilidad respiratoria conocida, la empresa alega que no precisa reevaluar porque la plaza se revisó de modo genérico el año anterior. ¿Qué factor obligatorio de la evaluación inicial se ignora?","opciones":{"A":"La necesidad de repetir los análisis médicos trimestrales aunque no cambien los equipos.","B":"La limitación de los datos personales al ámbito exclusivo del plan de evacuación exterior.","C":"La imposibilidad de evaluar puestos técnicos ocupados por personal con alergias previas.","D":"La obligación de considerar también las particularidades de quienes desempeñan cada labor."},"correcta":"D","explicacion":"La evaluación debe tener en cuenta la naturaleza de la actividad, las características de los puestos de trabajo y las de los trabajadores que deban desempeñarlos, lo que incluye sus particularidades personales relevantes para su salud."},{"id":40,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.2","subtema":"3.2. Peligro vs. riesgo y etapas iniciales (análisis y estimación)","enunciado":"En una cocina industrial hay un suelo mojado con restos de aceite y un cuchillo de despiece sin funda sobre la mesa. Desde el punto de vista técnico preventivo, ¿qué representan exactamente el suelo mojado y el cuchillo sin funda?","opciones":{"A":"Riesgos valorados como intolerables con independencia de la probabilidad de accidente.","B":"Grados de prioridad muy alta que obligan a paralizar de inmediato toda la actividad.","C":"Peligros, es decir, fuentes o situaciones con potencial para causar una lesión o daño.","D":"Consecuencias dañinas que ya se han materializado en la salud de los trabajadores."},"correcta":"C","explicacion":"El peligro (que se identifica) es toda fuente, situación o acto con potencial para causar daño en términos de lesión o enfermedad. El riesgo (que se evalúa) es la combinación de probabilidad y gravedad del daño si ese peligro se materializa."},{"id":41,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.2","subtema":"3.2. Peligro vs. riesgo y etapas iniciales (análisis y estimación)","enunciado":"Un técnico recorre una carpintería utilizando un check-list o cuestionario de chequeo para detectar y describir qué situaciones peligrosas existen en cada máquina. ¿Qué etapa concreta de la evaluación de riesgos está ejecutando?","opciones":{"A":"La priorización de las actuaciones según el horario de exposición del personal.","B":"La valoración económica de las inversiones necesarias para eliminar el ruido.","C":"El análisis del riesgo orientado a identificar y describir los riesgos existentes.","D":"La estimación de la magnitud considerando la gravedad y el número de afectados."},"correcta":"C","explicacion":"La primera etapa de la evaluación es el análisis del riesgo mediante un check-list (cuestionario o guía de chequeo), cuya finalidad es identificar y describir el riesgo."},{"id":42,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.2","subtema":"3.2. Peligro vs. riesgo y etapas iniciales (análisis y estimación)","enunciado":"Una vez identificados los peligros en una oficina, la persona evaluadora calcula el alcance de cada situación cruzando la frecuencia probable con la severidad del daño y considerando cuántas personas podrían resultar afectadas. ¿Qué etapa realiza?","opciones":{"A":"El análisis inicial orientado a detectar peligros mediante un cuestionario de chequeo.","B":"La estimación orientada a ponderar probabilidad, gravedad del daño y personas expuestas.","C":"La valoración orientada a clasificar si el control actual requiere mejoras o paralización.","D":"La priorización orientada a ordenar las intervenciones según su urgencia preventiva."},"correcta":"B","explicacion":"La segunda etapa es la estimación del riesgo, que permite determinar su magnitud en función de la gravedad del daño (consecuencia) y la probabilidad de que ocurra, teniendo en cuenta el número de personas que pueden verse afectadas."},{"id":43,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.2","subtema":"3.2. Peligro vs. riesgo y etapas iniciales (análisis y estimación)","enunciado":"¿Cuál de las siguientes afirmaciones distingue con mayor precisión técnica los conceptos de peligro y riesgo en la evaluación preventiva?","opciones":{"A":"El peligro se cuantifica mediante tablas estadísticas y el riesgo se elimina con un cuestionario.","B":"El peligro es una fuente con potencial de daño que se identifica, y el riesgo se evalúa combinando probabilidad y gravedad.","C":"El peligro aparece únicamente en trabajos del Anexo I y el riesgo en cualquier puesto de oficina.","D":"El peligro mide el número de trabajadores afectados y el riesgo determina la sanción administrativa."},"correcta":"B","explicacion":"Según el recuadro conceptual del tema, el peligro se identifica como la fuente, situación o acto con potencial para causar daño, mientras que el riesgo se evalúa como la combinación de la probabilidad de que ocurra un suceso peligroso y la gravedad del daño causado."},{"id":44,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.2","subtema":"3.2. Peligro vs. riesgo y etapas iniciales (análisis y estimación)","enunciado":"En la evaluación de riesgos de Miguel como delineante vista en el documento, se asignan códigos como 010 a caídas al mismo nivel, 070 a choques contra objetos inmóviles y 090 a golpes con herramientas. ¿De dónde proceden esos códigos?","opciones":{"A":"De una clasificación interna aprobada por el comité de seguridad y salud.","B":"De los capítulos reglamentarios establecidos para redactar el plan de autoprotección.","C":"De la tabla oficial de codificación establecida por el organismo técnico nacional.","D":"Del listado de actividades peligrosas recogido en el Anexo I del reglamento."},"correcta":"C","explicacion":"Como indica el ejemplo del documento, los riesgos se codifican conforme a la tabla establecida por el INSST (por ejemplo, 010 caídas al mismo nivel, 020 caídas a distinto nivel, 090 golpes y cortes de herramientas)."},{"id":45,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.2","subtema":"3.2. Peligro vs. riesgo y etapas iniciales (análisis y estimación)","enunciado":"Si en una empresa existen dos puestos idénticos con un mismo riesgo de corte leve, pero en uno trabajan dos personas y en otro doce, ¿en qué momentos de la evaluación influye directamente tener en cuenta ese número de afectados?","opciones":{"A":"En la estimación de la magnitud y posteriormente en la priorización de las actuaciones.","B":"En la identificación inicial del peligro y en la selección del cuestionario de chequeo.","C":"En la elección de la modalidad organizativa y en el crédito horario de los delegados.","D":"En la periodicidad legal de las auditorías externas y en la revisión médica voluntaria."},"correcta":"A","explicacion":"El número de personas que pueden verse afectadas se considera en la estimación del riesgo y vuelve a ser un criterio clave tanto en la priorización (4.º criterio) como en la planificación de la acción preventiva."},{"id":46,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.3","subtema":"3.3. Valoración del riesgo según el método INSST (T, TO, MO, I, IN)","enunciado":"En un almacén de conservas se observa que la caída de cajas desde cierta altura tiene una probabilidad media de producirse y unas consecuencias calificadas como dañinas. Según la tabla del INSST, ¿qué grado de riesgo corresponde y qué implica?","opciones":{"A":"Riesgo moderado (MO); exige esfuerzos e inversiones precisas para reducirlo en un plazo determinado.","B":"Riesgo trivial (T); no requiere ninguna acción específica por tener una incidencia mínima en la salud.","C":"Riesgo tolerable (TO); basta realizar comprobaciones periódicas sin implantar nuevas medidas costosas.","D":"Riesgo intolerable (IN); obliga a paralizar de inmediato toda la actividad productiva del almacén."},"correcta":"A","explicacion":"En la tabla del INSST, probabilidad media combinada con consecuencias dañinas (D) da como resultado un riesgo moderado (MO). Esto requiere hacer esfuerzos para reducirlo, determinar las inversiones necesarias e implantar medidas en un periodo determinado."},{"id":47,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.3","subtema":"3.3. Valoración del riesgo según el método INSST (T, TO, MO, I, IN)","enunciado":"Durante la evaluación de un taller eléctrico se detecta una instalación defectuosa donde la probabilidad de contacto eléctrico es alta y las consecuencias previsibles son muy dañinas. ¿Qué decisión exige la valoración resultante según el método del INSST?","opciones":{"A":"Valorar mejoras modestas sin carga económica y vigilar mediante revisiones anuales.","B":"Implantar medidas correctoras a medio plazo sin interrumpir el turno de producción actual.","C":"Impedir el inicio o continuidad del trabajo hasta reducirlo, prohibiéndolo si es imposible.","D":"Informar al personal sobre el peligro y mantener la actividad hasta contratar un seguro extra."},"correcta":"C","explicacion":"Probabilidad alta con consecuencias muy dañinas (MD) determina un riesgo intolerable (IN). Conforme a la tabla de valoración, no debe iniciarse ni continuarse el trabajo hasta reducir el riesgo; si no puede reducirse ni con grandes recursos, debe prohibirse paralizando la actividad."},{"id":48,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.3","subtema":"3.3. Valoración del riesgo según el método INSST (T, TO, MO, I, IN)","enunciado":"Un técnico valora el riesgo de incendio en una oficina con probabilidad baja de que ocurra, pero con consecuencias muy dañinas si llegara a materializarse. ¿Qué grado de riesgo obtiene en la matriz del INSST?","opciones":{"A":"Riesgo trivial (T).","B":"Riesgo tolerable (TO).","C":"Riesgo importante (I).","D":"Riesgo moderado (MO)."},"correcta":"D","explicacion":"En la tabla de estimación del INSST, el cruce de probabilidad baja con consecuencias muy dañinas (MD) corresponde a un riesgo moderado (MO), tal como se refleja también en el ejemplo del delineante con el código 214 (Incendios. Evacuación)."},{"id":49,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.3","subtema":"3.3. Valoración del riesgo según el método INSST (T, TO, MO, I, IN)","enunciado":"En una planta industrial hay una tarea ya en marcha cuyo riesgo acaba de ser valorado como Importante (I), al combinar probabilidad media y consecuencias muy dañinas. ¿Cómo debe actuar la empresa respecto a los plazos de solución?","opciones":{"A":"Debe esperar a la siguiente revisión anual para no alterar la planificación financiera.","B":"Debe solucionar el problema en un tiempo inferior al establecido para los riesgos moderados.","C":"Puede continuar indefinidamente si los trabajadores firman un consentimiento voluntario.","D":"No necesita aplicar medidas técnicas salvo que no supongan ninguna carga económica."},"correcta":"B","explicacion":"Para el riesgo importante (I), si el trabajo no ha empezado no debe comenzarse hasta reducir el riesgo; si ya se está realizando, debe solucionarse en un tiempo inferior al de los riesgos moderados, pudiendo requerir grandes recursos."},{"id":50,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.3","subtema":"3.3. Valoración del riesgo según el método INSST (T, TO, MO, I, IN)","enunciado":"Un riesgo de tropiezo leve en un despacho presenta probabilidad media y consecuencias ligeramente dañinas, resultando calificado como Tolerable (TO). ¿Qué actuación preventiva corresponde según el método del INSST?","opciones":{"A":"Implantar inversiones urgentes en un plazo breve e interrumpir la tarea si es preciso.","B":"Abstenerse de realizar seguimiento alguno dado su nulo impacto sobre la salud laboral.","C":"Efectuar comprobaciones periódicas y valorar mejoras que no exijan gran coste económico.","D":"Prohibir el acceso al despacho hasta sustituir íntegramente los equipos existentes."},"correcta":"C","explicacion":"En el grado tolerable (TO) no se necesita mejorar la acción preventiva de inmediato, pero se deben considerar mejoras sin carga económica importante y realizar comprobaciones periódicas para asegurar que se mantiene la eficacia de las medidas de control."},{"id":51,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.3","subtema":"3.3. Valoración del riesgo según el método INSST (T, TO, MO, I, IN)","enunciado":"¿Qué dos combinaciones distintas de probabilidad y gravedad de consecuencias producen exactamente un grado de riesgo Importante (I) en la matriz del INSST?","opciones":{"A":"Probabilidad baja con daño ligeramente dañino y probabilidad media con daño muy dañino.","B":"Probabilidad media con daño dañino y probabilidad alta con daño ligeramente dañino.","C":"Probabilidad baja con daño muy dañino y probabilidad alta con daño muy dañino.","D":"Probabilidad media con daño muy dañino y probabilidad alta con daño dañino."},"correcta":"D","explicacion":"Según la tabla del INSST, el riesgo importante (I) se obtiene en dos casillas: probabilidad media + muy dañino (MD), y probabilidad alta + dañino (D). Probabilidad alta + muy dañino sube a intolerable (IN)."},{"id":52,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.3","subtema":"3.3. Valoración del riesgo según el método INSST (T, TO, MO, I, IN)","enunciado":"Al utilizar un cúter convencional en una oficina de arquitectura, el riesgo de cortes se estima con probabilidad media y consecuencias dañinas (grado MO). ¿Qué medida concreta adopta el ejemplo del documento para controlarlo?","opciones":{"A":"Sustituir el cúter por otro dotado de mecanismos de seguridad.","B":"Prohibir de forma definitiva cualquier trabajo manual de maquetación.","C":"Mantener el mismo cúter realizando únicamente comprobaciones anuales.","D":"Trasladar la tarea al equipo de primera intervención contra emergencias."},"correcta":"A","explicacion":"En el ejemplo 2 de la evaluación de Miguel (delineante), el riesgo 090 (golpes contra objetos o herramientas) obtiene un grado MO (prioridad mediana-alta) y la acción adoptada es sustituir el cúter por otro dotado de mecanismos de seguridad."},{"id":53,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.3","subtema":"3.3. Valoración del riesgo según el método INSST (T, TO, MO, I, IN)","enunciado":"En una valoración de riesgos, una situación laboral tiene probabilidad baja de ocurrir y consecuencias ligeramente dañinas si se materializa. ¿Qué grado de riesgo y qué acción conlleva según el INSST?","opciones":{"A":"Riesgo trivial (T), por lo que no se requiere ninguna acción específica.","B":"Riesgo tolerable (TO), que exige inversiones económicas en un plazo breve.","C":"Riesgo moderado (MO), que impide iniciar la tarea hasta modificar los equipos.","D":"Riesgo importante (I), que obliga a realizar simulacros trimestrales de control."},"correcta":"A","explicacion":"Probabilidad baja combinada con consecuencias ligeramente dañinas (LD) produce un riesgo trivial (T), cuya incidencia en la salud es pequeña y no requiere una acción específica."},{"id":54,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.4","subtema":"3.4. Priorización de la actuación preventiva","enunciado":"En una empresa se detectan dos riesgos de igual gravedad, pero uno tiene una probabilidad alta de ocurrencia y el otro una probabilidad baja. Según los criterios de priorización estudiados, ¿cómo debe procederse?","opciones":{"A":"Actuar primero sobre el riesgo con menor probabilidad porque resulta más sencillo de corregir.","B":"Actuar en el mismo plazo sobre ambos sin atender a diferencias de probabilidad ni plantilla.","C":"Actuar prioritariamente sobre el riesgo que presenta mayor probabilidad de ocurrencia.","D":"Actuar únicamente sobre el que afecte a maquinaria adquirida en el último año fiscal."},"correcta":"C","explicacion":"El segundo criterio de priorización (prioridad alta) establece que, ante riesgos de la misma gravedad, se debe actuar en primer lugar sobre los que tienen mayor probabilidad de ocurrencia."},{"id":55,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.4","subtema":"3.4. Priorización de la actuación preventiva","enunciado":"Un responsable de prevención duda entre intervenir primero frente a un riesgo con consecuencias muy graves y escasa probabilidad de ocurrencia o frente a otro riesgo muy probable pero de consecuencias pequeñas. Aplicando el tercer nivel de priorización, ¿qué debe hacer?","opciones":{"A":"Corregir antes el riesgo muy probable de consecuencias pequeñas por su frecuencia diaria.","B":"Posponer ambos riesgos hasta que el comité de empresa apruebe un expediente económico.","C":"Dar preferencia al riesgo de consecuencias muy graves aunque su probabilidad sea escasa.","D":"Elegir al azar cualquiera de los dos porque ambos reciben una prioridad exactamente idéntica."},"correcta":"C","explicacion":"El tercer criterio (prioridad mediana) indica expresamente que, ante riesgos de consecuencias muy graves y escasa probabilidad, se debe actuar antes que sobre riesgos con mayor probabilidad pero consecuencias pequeñas."},{"id":56,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.4","subtema":"3.4. Priorización de la actuación preventiva","enunciado":"Tras haber resuelto los riesgos más graves y los criterios superiores de gravedad y probabilidad, quedan dos riesgos pendientes de características similares, pero uno afecta a 40 trabajadores y el otro a 3. ¿Cuál debe priorizarse según el cuarto nivel?","opciones":{"A":"El que afecta a los 3 trabajadores porque permite una solución técnica más económica.","B":"El que afecta a los 40 trabajadores por implicar a un mayor número de personas expuestas.","C":"Ninguno de los dos, porque a partir del tercer nivel ya no es necesario planificar medidas.","D":"El que tenga el código numérico más alto dentro de la clasificación oficial del INSST."},"correcta":"B","explicacion":"El cuarto criterio de priorización (prioridad baja) establece actuar sobre los riesgos que afectan a un mayor número de trabajadores expuestos."},{"id":57,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.4","subtema":"3.4. Priorización de la actuación preventiva","enunciado":"¿En qué lugar de la escala de priorización se sitúa el criterio de actuar sobre aquellos riesgos a los que los trabajadores están expuestos durante más horas dentro de su jornada laboral?","opciones":{"A":"En el primer lugar (prioridad muy alta), por encima de la gravedad del daño posible.","B":"En el segundo lugar (prioridad alta), sustituyendo el análisis de la probabilidad de ocurrencia.","C":"En el tercer lugar (prioridad mediana), equiparado a los riesgos de consecuencias muy graves.","D":"En el quinto lugar (prioridad muy baja), tras gravedad, probabilidad y número de expuestos."},"correcta":"D","explicacion":"La escala de priorización sigue este orden: 1.º Muy alta (más graves), 2.º Alta (igual gravedad, mayor probabilidad), 3.º Mediana (muy graves y poca probabilidad frente a alta probabilidad y consecuencias pequeñas), 4.º Baja (mayor n.º de expuestos) y 5.º Muy baja (más horas de exposición en la jornada)."},{"id":58,"temaId":"tema-3","tema":"Epígrafe 3. Evaluación de riesgos","subtemaId":"3.4","subtema":"3.4. Priorización de la actuación preventiva","enunciado":"Al ordenar la intervención preventiva en un taller, el técnico identifica un riesgo calificado como el más grave de toda la planta, aunque solo afecta a un puesto ocupado dos horas al día. ¿Qué prioridad le corresponde?","opciones":{"A":"Prioridad muy alta, porque la máxima gravedad encabeza siempre el orden de actuación.","B":"Prioridad muy baja, porque el número reducido de horas de exposición relega su urgencia.","C":"Prioridad baja, porque afecta únicamente a un trabajador dentro de toda la empresa.","D":"Prioridad mediana, porque combina escasa exposición con una posible gravedad elevada."},"correcta":"A","explicacion":"El primer nivel de priorización (muy alta) corresponde siempre a los riesgos más graves. El número de trabajadores expuestos y las horas de exposición ocupan el cuarto y quinto nivel respectivamente."},{"id":59,"temaId":"tema-4","tema":"Epígrafe 4. Planificación de la acción preventiva","subtemaId":"4.1","subtema":"4.1. Contenido, prioridades, plazos y modificación de la planificación","enunciado":"Una empresa elabora un listado de medidas preventivas tras evaluar sus puestos, pero omite indicar quién debe ejecutarlas y en qué fecha límite deben quedar implantadas. ¿Qué requisito esencial de la planificación de la acción preventiva está incumpliendo?","opciones":{"A":"La descripción de los procesos técnicos y de la estructura jerárquica de la entidad.","B":"La fijación del plazo concreto de ejecución y de la persona responsable de cada medida.","C":"La indicación de los métodos de medición empleados durante el análisis inicial de riesgos.","D":"La relación de las especialidades médicas concertadas con el servicio de prevención ajeno."},"correcta":"B","explicacion":"La planificación de la acción preventiva requiere adoptar medidas para eliminar, controlar o reducir los riesgos, estableciendo un orden de prioridades y señalando expresamente el plazo para llevarlas a cabo y el responsable de su ejecución."},{"id":60,"temaId":"tema-4","tema":"Epígrafe 4. Planificación de la acción preventiva","subtemaId":"4.1","subtema":"4.1. Contenido, prioridades, plazos y modificación de la planificación","enunciado":"Al fijar el orden de prioridades dentro de la planificación de la acción preventiva, ¿qué dos factores principales señala el texto que deben considerarse?","opciones":{"A":"El coste de los equipos de protección y la antigüedad del centro de trabajo.","B":"La magnitud del riesgo y el número de trabajadores expuestos a dicho riesgo.","C":"La modalidad preventiva contratada y la duración temporal de los contratos.","D":"La disponibilidad de la inspección laboral y el turno horario de la dirección."},"correcta":"B","explicacion":"Según el apartado 4 del tema, la planificación establece un orden de prioridades de actuación dependiendo de la magnitud del riesgo y del número de trabajadores expuestos a ellos, aplicando los principios de la acción preventiva."},{"id":61,"temaId":"tema-4","tema":"Epígrafe 4. Planificación de la acción preventiva","subtemaId":"4.1","subtema":"4.1. Contenido, prioridades, plazos y modificación de la planificación","enunciado":"Una fábrica de muebles planifica medidas para reducir el polvo de madera, pero en los controles periódicos posteriores comprueba que la concentración de partículas sigue superando los límites previstos. ¿Qué obligación deriva de ese hallazgo?","opciones":{"A":"Modificar las actividades de prevención planificadas y adoptadas al no cumplir sus objetivos.","B":"Esperar al vencimiento del plan quinquenal antes de introducir cualquier ajuste técnico.","C":"Limitar la jornada de los delegados de prevención para reducir la exposición en planta.","D":"Sustituir automáticamente la modalidad preventiva por un servicio mancomunado externo."},"correcta":"A","explicacion":"Si a través de los controles periódicos previstos se detectase que las actividades de prevención planificadas y adoptadas por la empresa no cumplen los objetivos previstos, deberán ser modificadas."},{"id":62,"temaId":"tema-4","tema":"Epígrafe 4. Planificación de la acción preventiva","subtemaId":"4.1","subtema":"4.1. Contenido, prioridades, plazos y modificación de la planificación","enunciado":"¿En qué momento del ciclo preventivo debe iniciarse la planificación de la acción preventiva y qué marco general debe respetar en la selección de sus medidas?","opciones":{"A":"Antes de redactar el plan de prevención, respetando exclusivamente las preferencias de producción.","B":"Una vez realizada la evaluación de riesgos, teniendo en cuenta los principios de la acción preventiva.","C":"Únicamente tras producirse un accidente laboral, atendiendo a los costes asegurados por la mutua.","D":"Al constituirse el comité de seguridad, siguiendo únicamente el criterio económico de gerencia."},"correcta":"B","explicacion":"Una vez realizada la evaluación de riesgos, se procede a planificar la acción preventiva para eliminar, controlar o reducir los riesgos detectados, teniendo en cuenta los principios de la acción preventiva."},{"id":63,"temaId":"tema-4","tema":"Epígrafe 4. Planificación de la acción preventiva","subtemaId":"4.1","subtema":"4.1. Contenido, prioridades, plazos y modificación de la planificación","enunciado":"En una oficina se programa la renovación de las sillas ergonómicas para combatir la fatiga postural (riesgo moderado), pero el cuadro solo anota «empresa» como encargada y «cuando haya fondos» como fecha. ¿Por qué es defectuosa esta programación?","opciones":{"A":"Porque los riesgos moderados no admiten programación hasta que aparezca una baja médica.","B":"Porque la dotación de mobiliario corresponde financiarla al comité de seguridad y salud.","C":"Porque las medidas ergonómicas se incluyen en el capítulo final del plan de autoprotección.","D":"Porque exige designar a una persona encargada concreta y fijar un horizonte temporal preciso."},"correcta":"D","explicacion":"Para que la planificación sea operativa y controlable, debe señalar de forma concreta el plazo para llevar a cabo cada medida y el responsable específico encargado de ejecutarla."},{"id":64,"temaId":"tema-4","tema":"Epígrafe 4. Planificación de la acción preventiva","subtemaId":"4.1","subtema":"4.1. Contenido, prioridades, plazos y modificación de la planificación","enunciado":"En el caso práctico del libro sobre una industria cárnica donde un trabajador eventual sin formación sufre un corte grave en una línea demasiado rápida y sin equipo de protección, ¿qué fallo afecta a la planificación preventiva?","opciones":{"A":"No haber solicitado a la Inspección de Trabajo que contratase directamente al operario eventual.","B":"Haber utilizado guías del Instituto Nacional de Seguridad y Salud en lugar de normas internas.","C":"Haber asignado al comité de seguridad y salud la revisión semanal de los cuchillos de despiece.","D":"No haber priorizado la formación previa, los equipos de protección y la adecuación del ritmo de trabajo."},"correcta":"D","explicacion":"La planificación preventiva debe adoptar las medidas necesarias para eliminar o controlar riesgos como la falta de formación en un trabajador recién contratado, la velocidad excesiva de la línea y la ausencia de guantes de malla o mandil protector."},{"id":65,"temaId":"tema-4","tema":"Epígrafe 4. Planificación de la acción preventiva","subtemaId":"4.1","subtema":"4.1. Contenido, prioridades, plazos y modificación de la planificación","enunciado":"¿Cuál es el propósito inmediato de planificar la acción preventiva una vez que los riesgos han sido identificados, estimados y valorados en la evaluación?","opciones":{"A":"Formalizar ante la dirección la estructura jerárquica y los órganos de representación.","B":"Eliminar, controlar o reducir dichos riesgos mediante medidas organizadas con plazo y responsable.","C":"Verificar mediante controles periódicos si las actuaciones previas han resultado eficaces.","D":"Clasificar las posibles situaciones de emergencia según la gravedad y los medios necesarios."},"correcta":"B","explicacion":"El objetivo directo de la planificación tras la evaluación es adoptar las medidas necesarias para eliminar, controlar o reducir los riesgos detectados con prioridades, plazos y responsables definidos."},{"id":66,"temaId":"tema-4","tema":"Epígrafe 4. Planificación de la acción preventiva","subtemaId":"4.2","subtema":"4.2. Control de eficacia, riesgo grave e inminente y Anexo I","enunciado":"En una obra de excavación se detecta una grieta activa en el talud que amenaza con derrumbarse de forma inmediata sobre los operarios que trabajan en la zanja. ¿Cómo define el documento este tipo de situación?","opciones":{"A":"Riesgo moderado de prioridad baja, que permite terminar el turno antes de reforzar la zanja.","B":"Riesgo tolerable de origen natural, sujeto únicamente a comprobaciones visuales mensuales.","C":"Riesgo grave e inminente, al ser racionalmente probable su materialización inmediata con daño grave.","D":"Conato de emergencia leve, solucionable por cualquier trabajador con medios básicos locales."},"correcta":"C","explicacion":"Se define como riesgo grave e inminente aquel que resulta probable, racionalmente, que se materialice en un futuro inmediato y pueda suponer un daño grave para la salud de los trabajadores."},{"id":67,"temaId":"tema-4","tema":"Epígrafe 4. Planificación de la acción preventiva","subtemaId":"4.2","subtema":"4.2. Control de eficacia, riesgo grave e inminente y Anexo I","enunciado":"Una empresa de construcción con trabajos de excavación y riesgo de sepultamiento consulta dónde se recogen legalmente las actividades consideradas de especial peligrosidad en materia organizativa. ¿Dónde debe buscar esa relación?","opciones":{"A":"En el Anexo I del Reglamento de los Servicios de Prevención (RSP).","B":"En el capítulo tercero del plan de evacuación de centros docentes y oficinas.","C":"En la tabla de crédito horario mensual asignada a los delegados de personal.","D":"En los estatutos mercantiles de las mutuas colaboradoras con la Seguridad Social."},"correcta":"A","explicacion":"El Anexo I del Reglamento de los Servicios de Prevención (RD 39/1997) recoge las actividades consideradas de especial peligrosidad (como obras de construcción, excavación, explosivos, alta tensión, etc.)."},{"id":68,"temaId":"tema-4","tema":"Epígrafe 4. Planificación de la acción preventiva","subtemaId":"4.2","subtema":"4.2. Control de eficacia, riesgo grave e inminente y Anexo I","enunciado":"¿Cuál de las siguientes actividades empresariales NO forma parte del listado del Anexo I del Reglamento de los Servicios de Prevención recogido en el tema?","opciones":{"A":"Trabajos con exposición a radiaciones ionizantes o manipulación de explosivos.","B":"Actividades de inmersión bajo el agua y trabajos en la industria siderúrgica.","C":"Tareas de gestión contable y atención telefónica en despacho administrativo.","D":"Trabajos con riesgos eléctricos en alta tensión o concentraciones de polvo silíceo."},"correcta":"C","explicacion":"Las tareas administrativas ordinarias no figuran en el Anexo I del RSP, que sí incluye radiaciones ionizantes, explosivos, inmersión bajo el agua, siderurgia, alta tensión, polvo silíceo, minería, construcción con riesgo de altura o sepultamiento, entre otras."},{"id":69,"temaId":"tema-4","tema":"Epígrafe 4. Planificación de la acción preventiva","subtemaId":"4.2","subtema":"4.2. Control de eficacia, riesgo grave e inminente y Anexo I","enunciado":"En el marco de la planificación preventiva, la empresa realiza reconocimientos de salud y mediciones ambientales periódicas para comprobar si las medidas implantadas están funcionando. ¿Qué persigue exactamente este control?","opciones":{"A":"Sustituir la evaluación inicial para no tener que revisarla si cambian las máquinas.","B":"Trasladar a los delegados de prevención la responsabilidad económica de las mejoras.","C":"Demostrar que las actividades de la empresa deben quedar excluidas del Anexo I del RSP.","D":"Constatar la eficacia preventiva mediante menor exposición y mejor salud de los expuestos."},"correcta":"D","explicacion":"El seguimiento, control y evaluación periódica tienen como fin constatar la disminución de la exposición a los riesgos y la mejora del estado de salud de los trabajadores expuestos (eficacia), corrigiendo los planes si no se cumple."},{"id":70,"temaId":"tema-4","tema":"Epígrafe 4. Planificación de la acción preventiva","subtemaId":"4.2","subtema":"4.2. Control de eficacia, riesgo grave e inminente y Anexo I","enunciado":"¿Qué diferencia existe entre una actividad con riesgo grave e inminente y una incluida en el Anexo I del RSP?","opciones":{"A":"El Anexo I solo se aplica a empresas con más de 500 trabajadores; el riesgo grave e inminente solo afecta a los autónomos.","B":"El riesgo grave e inminente se revisa cada cinco años por auditoría; el Anexo I impide realizar simulacros de evacuación.","C":"El Anexo I enumera sectores o trabajos especialmente peligrosos; el riesgo grave e inminente alude a un peligro concreto de materialización inmediata.","D":"Ambos términos significan exactamente lo mismo y obligan a concertar un servicio de prevención ajeno de forma inmediata."},"correcta":"C","explicacion":"El Anexo I del RSP agrupa actividades de especial peligrosidad por su naturaleza (minería, explosivos, alta tensión, etc.), lo cual condiciona la organización preventiva; mientras que riesgo grave e inminente describe cualquier situación concreta en la que un daño grave es racionalmente probable en un futuro inmediato."},{"id":71,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.1","subtema":"5.1. Criterios generales y asunción personal por el empresario","enunciado":"El dueño de una empresa de reformas quiere elegir la modalidad de organización preventiva fijándose únicamente en cuánto cuesta cada opción. Según el Reglamento de los Servicios de Prevención (RD 39/1997), ¿de qué tres factores reales depende esta elección?","opciones":{"A":"Del número de trabajadores, de la peligrosidad de las actividades y de los riesgos existentes.","B":"De la antigüedad de la empresa, del número de clientes y de la provincia donde opere.","C":"Del volumen de facturación anual, del tipo de contrato mercantil y de la edad de la plantilla.","D":"De la decisión de la mutua, del número de centros de salud cercanos y del horario comercial."},"correcta":"A","explicacion":"Como indica el recuadro sobre organización de la prevención, la elección entre las modalidades del artículo 10 del RSP depende del número de trabajadores, de la peligrosidad de las actividades desarrolladas y de los riesgos a los que se exponen los trabajadores."},{"id":72,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.1","subtema":"5.1. Criterios generales y asunción personal por el empresario","enunciado":"Una tienda de ropa tiene 22 trabajadores distribuidos en un único centro de trabajo. Su propietario trabaja allí a diario y posee la formación preventiva exigida. ¿Puede asumir personalmente la actividad preventiva?","opciones":{"A":"No, porque el límite máximo absoluto para la asunción personal es de diez trabajadores en todo caso.","B":"Sí, siempre que no realice actividades del Anexo I y cubra lo no asumido por otra modalidad.","C":"No, porque a partir de veinte trabajadores es obligatorio constituir un servicio de prevención propio.","D":"Sí, incluso quedando exento de contratar la vigilancia de la salud por otra modalidad distinta."},"correcta":"B","explicacion":"El empresario puede asumir personalmente la prevención en empresas de hasta 10 trabajadores, o de hasta 25 trabajadores si disponen de un solo centro de trabajo, siempre que no desarrollen actividades del Anexo I, trabaje allí habitualmente y tenga capacidad. Las actividades no asumidas (como la vigilancia de la salud) deben cubrirse mediante otra modalidad."},{"id":73,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.1","subtema":"5.1. Criterios generales y asunción personal por el empresario","enunciado":"Una empresa pirotécnica cuenta con 8 trabajadores en plantilla y su gerente trabaja habitualmente en el taller con formación superior en prevención. ¿Puede asumir personalmente toda la prevención de riesgos laborales?","opciones":{"A":"Sí, porque no supera el umbral de diez trabajadores establecido en el reglamento vigente.","B":"Sí, porque la plantilla reducida le exime de cumplir restricciones por tipo de actividad.","C":"No, porque la fabricación y manipulación de explosivos figura en el Anexo I del RSP.","D":"No, porque su único centro de trabajo supera el límite permitido para industrias locales."},"correcta":"C","explicacion":"Aunque la plantilla sea inferior a 10 trabajadores, la empresa desarrolla una actividad incluida en el Anexo I del RSP (fabricación, manipulación y utilización de explosivos), lo que impide al empresario asumir personalmente la actividad preventiva."},{"id":74,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.1","subtema":"5.1. Criterios generales y asunción personal por el empresario","enunciado":"Un empresario tiene una gestoría con 14 trabajadores repartidos en dos oficinas en distintos barrios de la ciudad. Aunque posee formación preventiva y no realiza actividades peligrosas, ¿puede asumir personalmente la prevención?","opciones":{"A":"Sí, porque la plantilla total de catorce empleados está por debajo del tope de veinticinco.","B":"No, porque al superar los diez trabajadores solo cabe la asunción personal en un único centro.","C":"Sí, siempre que los dos centros pertenezcan al mismo municipio y compartan código postal.","D":"No, porque las gestorías administrativas están obligadas a tener un servicio mancomunado."},"correcta":"B","explicacion":"El tramo de 11 a 25 trabajadores solo permite la asunción personal cuando la empresa cuenta con un solo centro de trabajo. Al tener dos centros distintos y superar los 10 trabajadores, no puede asumirla personalmente."},{"id":75,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.1","subtema":"5.1. Criterios generales y asunción personal por el empresario","enunciado":"El dueño de una panadería de 6 trabajadores cumple todos los requisitos para asumir personalmente la actividad preventiva y ejerce allí su labor diaria. Sin embargo, no es médico del trabajo. ¿Cómo debe cubrir la vigilancia de la salud de sus empleados?","opciones":{"A":"Queda exento de ofrecer reconocimientos médicos por ser una microempresa familiar.","B":"Puede realizar él mismo un cuestionario básico de salud aprovechando su capacidad preventiva.","C":"Debe cubrirla recurriendo a alguna de las restantes modalidades, como un servicio ajeno.","D":"Debe trasladar esa competencia al delegado de personal mediante pacto escrito interno."},"correcta":"C","explicacion":"El texto establece expresamente que la vigilancia de la salud y las demás actividades preventivas que el empresario no pueda asumir personalmente deben cubrirse recurriendo a alguna de las restantes modalidades de organización preventiva."},{"id":76,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.1","subtema":"5.1. Criterios generales y asunción personal por el empresario","enunciado":"Carlos es propietario de un restaurante con 7 trabajadores y tiene la titulación adecuada en prevención, pero solo acude al local una vez al mes para revisar las cuentas porque dirige otros negocios. ¿Cumple los requisitos para asumir personalmente la prevención?","opciones":{"A":"Sí, porque la ley solo exige que visite el establecimiento antes de cada evaluación inicial.","B":"Sí, siempre que delegue las tareas diarias de seguridad en el cocinero con más experiencia.","C":"No, porque los restaurantes pertenecen a las actividades de especial peligrosidad del Anexo I.","D":"No, porque uno de los requisitos obligatorios es desarrollar habitualmente su actividad en el centro."},"correcta":"D","explicacion":"Para asumir personalmente la actividad preventiva, el empresario debe desarrollar de forma habitual su actividad profesional en el centro de trabajo, además de cumplir los límites de plantilla, exclusión del Anexo I y capacidad preventiva."},{"id":77,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.1","subtema":"5.1. Criterios generales y asunción personal por el empresario","enunciado":"En el caso práctico del libro sobre una industria cárnica de 299 trabajadores, el empresario Carlos Rodríguez decide asumir personalmente la prevención de la empresa. ¿Por qué es incorrecta su decisión?","opciones":{"A":"Porque con 299 trabajadores supera los umbrales máximos permitidos para esa modalidad.","B":"Porque la industria alimentaria exige constituir un servicio propio desde cien empleados.","C":"Porque los empresarios de centros únicos no pueden asumir funciones preventivas en ese sector.","D":"Porque en plantillas superiores a cien personas debe contratarse un servicio mancomunado."},"correcta":"A","explicacion":"La asunción personal por el empresario está restringida a empresas de hasta 10 trabajadores (o hasta 25 con un solo centro de trabajo). Con 299 empleados en plantilla, esa modalidad resulta legalmente imposible."},{"id":78,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.2","subtema":"5.2. Designación de trabajadores","enunciado":"Una empresa de 80 trabajadores no obligada a crear servicio de prevención propio decide designar a dos operarios con formación básica para que asuman las tareas preventivas, pero les exige hacerlo fuera de su jornada laboral sin reducir su carga de trabajo. ¿Qué falla en esta decisión?","opciones":{"A":"Que los trabajadores designados deben tener dedicación exclusiva y abandonar su puesto previo.","B":"Que con 80 trabajadores está prohibido designar personal interno y debe contratarse un SPP.","C":"Que la designación exige asignarles horas dentro de su jornada para realizar esas tareas.","D":"Que los trabajadores designados asumen automáticamente también la vigilancia médica interna."},"correcta":"C","explicacion":"Aunque a los trabajadores designados no se les exige dedicación exclusiva a las tareas preventivas, el empresario debe dotarlos de los medios adecuados y asignarles unas horas específicas para poder desempeñarlas."},{"id":79,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.2","subtema":"5.2. Designación de trabajadores","enunciado":"En una empresa conservera de 134 trabajadores, el empresario nombra a tres empleados para encargarse de la prevención, pero carecen de formación preventiva para las funciones asignadas. Ante su falta de capacidad, ¿puede considerarse que han constituido un servicio de prevención propio?","opciones":{"A":"Sí, porque cualquier grupo de tres trabajadores designados equivale a un servicio propio.","B":"No, porque los designados deben tener formación adecuada y, si es insuficiente, acudir a un SPA.","C":"Sí, siempre que el comité de seguridad y salud les otorgue un crédito horario retribuido.","D":"No, porque a partir de cien trabajadores queda prohibido contar con trabajadores designados."},"correcta":"B","explicacion":"Como muestra el apartado En qué nos equivocamos del libro, los trabajadores designados deben contar con la formación correspondiente a sus funciones; si la designación resulta insuficiente y no hay obligación de SPP, debe recurrirse a un servicio de prevención ajeno (SPA)."},{"id":80,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.2","subtema":"5.2. Designación de trabajadores","enunciado":"Una clínica con 45 empleados decide designar a una trabajadora con la formación necesaria para desarrollar la acción preventiva, ya que el gerente no la ha asumido personalmente. ¿Qué acciones no asumidas por ella deberán cubrirse mediante un servicio de prevención ajeno (SPA)?","opciones":{"A":"La adquisición de señalización luminosa y el archivo mensual de las nóminas.","B":"Las competencias del comité paritario relativas a sus reuniones trimestrales.","C":"La elaboración de los planos de evacuación ante un conato de incendio parcial.","D":"La vigilancia de la salud y las demás actividades preventivas no asumidas."},"correcta":"D","explicacion":"El tema precisa que las acciones preventivas no asumidas por los trabajadores designados —como de manera característica la vigilancia de la salud— deben desarrollarse mediante servicios de prevención ajenos (SPA)."},{"id":81,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.2","subtema":"5.2. Designación de trabajadores","enunciado":"¿Qué tres condiciones deben concurrir simultáneamente para que el empresario pueda organizar la prevención mediante la designación de uno o varios trabajadores?","opciones":{"A":"Que tengan dedicación exclusiva, trabajen en un único centro y pertenezcan al comité.","B":"Que posean título médico, pertenezcan al sindicato mayoritario y trabajen más de diez años.","C":"Que tengan formación correspondiente, no sea obligatorio el SPP y el empresario no asuma la prevención.","D":"Que la empresa supere los 250 trabajadores, opere en el Anexo I y carezca de auditoría."},"correcta":"C","explicacion":"El empresario puede designar trabajadores cuando tengan la formación correspondiente a las funciones a desarrollar, la empresa no esté obligada a crear un SPP y el empresario no haya asumido personalmente la actividad preventiva."},{"id":82,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.2","subtema":"5.2. Designación de trabajadores","enunciado":"En una empresa de 320 trabajadores dedicada a trabajos con exposición a sustancias de toxicidad aguda (Anexo I), el director quiere evitar crear un servicio de prevención propio recurriendo simplemente a designar a dos trabajadores formados. ¿Es legal esa alternativa?","opciones":{"A":"Sí, siempre que ambos trabajadores reciban una asignación de diez horas semanales cada uno.","B":"No, porque con entre 250 y 500 trabajadores en el Anexo I es obligatorio constituir un SPP.","C":"Sí, porque la obligación de servicio propio solo comienza al superar los quinientos empleados.","D":"No, porque la designación de trabajadores únicamente está permitida en empresas de menos de treinta empleados."},"correcta":"B","explicacion":"Una empresa que ocupe entre 250 y 500 trabajadores y desarrolle actividades de especial peligrosidad del Anexo I del RSP está obligada a constituir un servicio de prevención propio (SPP), por lo que no puede sustituirlo por trabajadores designados."},{"id":83,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.3","subtema":"5.3. Servicio de prevención propio (SPP)","enunciado":"Una empresa siderúrgica (actividad incluida en el Anexo I del RSP) cuenta con 499 trabajadores en plantilla. Su asesor le asegura que no necesita servicio de prevención propio porque no ha superado los 500 empleados. ¿Es correcto este asesoramiento?","opciones":{"A":"Sí, porque el umbral mínimo obligatorio para constituir servicio propio es de 501 trabajadores.","B":"Sí, siempre que contrate a una mutua colaboradora para ejercer como servicio de prevención ajeno.","C":"No, porque cualquier empresa con más de 100 trabajadores está obligada siempre a tener un SPP.","D":"No, porque entre 250 y 500 trabajadores con actividades del Anexo I es obligatorio constituir un SPP."},"correcta":"D","explicacion":"El SPP es obligatorio tanto para empresas de más de 500 trabajadores como para aquellas que ocupen entre 250 y 500 trabajadores y desarrollen actividades de especial peligrosidad incluidas en el Anexo I del RSP."},{"id":84,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.3","subtema":"5.3. Servicio de prevención propio (SPP)","enunciado":"Una empresa textil con 180 trabajadores no desarrolla actividades del Anexo I, pero ha acumulado numerosos accidentes graves en el último año. Ante esta elevada siniestralidad, ¿qué puede decidir la autoridad laboral?","opciones":{"A":"Exigirle constituir un servicio de prevención propio, salvo que concierte un servicio ajeno.","B":"Obligarle a asumir personalmente la prevención tras cursar una formación técnica superior.","C":"Imponerle la creación de un servicio mancomunado con otras industrias del mismo sector.","D":"Requerirle que designe trabajadores con dedicación exclusiva sin opción de concierto externo."},"correcta":"A","explicacion":"El tercer supuesto de SPP obligatorio se da cuando la autoridad laboral lo decide en función de la peligrosidad de la actividad o de la frecuencia o gravedad de la siniestralidad, salvo que la empresa opte por el concierto con un servicio de prevención ajeno."},{"id":85,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.3","subtema":"5.3. Servicio de prevención propio (SPP)","enunciado":"Una compañía logística con 650 trabajadores constituye su servicio de prevención propio cubriendo dos especialidades (seguridad en el trabajo e higiene industrial), pero sus dos técnicos dedican la mitad de la jornada a tareas de calidad comercial. ¿Qué requisito legal incumple?","opciones":{"A":"El personal del SPP debe cubrir como mínimo cuatro especialidades médicas internas.","B":"Los técnicos del SPP deben contar con al menos cinco años de antigüedad en calidad.","C":"El personal del SPP debe tener dedicación exclusiva a tareas relacionadas con la prevención.","D":"La empresa con más de 500 trabajadores debe cubrir todas las especialidades sin ayuda externa."},"correcta":"C","explicacion":"Los integrantes del servicio de prevención propio deben dedicarse de forma exclusiva a tareas relacionadas con la actividad preventiva y cubrir al menos dos especialidades preventivas."},{"id":86,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.3","subtema":"5.3. Servicio de prevención propio (SPP)","enunciado":"Un servicio de prevención propio cubre internamente las especialidades de seguridad en el trabajo y ergonomía y psicosociología aplicada, pero no dispone de especialistas en higiene industrial ni medicina del trabajo. ¿Cómo debe actuar la empresa respecto a las especialidades no cubiertas?","opciones":{"A":"Debe contratar las actividades preventivas no cubiertas con un servicio de prevención ajeno.","B":"Puede dejarlas sin cubrir porque el reglamento exige únicamente dos especialidades en total.","C":"Debe asignar esas funciones a los delegados de prevención dentro de su crédito horario.","D":"Puede concertarlas con una mutua colaboradora para que actúe como servicio mercantil."},"correcta":"A","explicacion":"En el SPP debe cubrirse al menos dos especialidades preventivas de forma interna, y todas las actividades preventivas no cubiertas por su personal propio deben contratarse con un servicio de prevención ajeno (SPA)."},{"id":87,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.3","subtema":"5.3. Servicio de prevención propio (SPP)","enunciado":"¿Cuáles son las cinco especialidades preventivas entre las que un servicio de prevención propio debe cubrir internamente al menos dos con técnicos de nivel superior?","opciones":{"A":"Seguridad, higiene industrial, ergonomía, psicosociología aplicada y medicina del trabajo.","B":"Primeros auxilios, evacuación, extinción de incendios, vigilancia médica y auditoría.","C":"Seguridad vial, ingeniería industrial, derecho laboral, ergonomía y medicina general.","D":"Evaluación de riesgos, planificación preventiva, formación, simulacros y autoprotección."},"correcta":"A","explicacion":"Las cinco especialidades preventivas recogidas en el tema son: seguridad en el trabajo, higiene industrial, ergonomía, psicosociología aplicada (o laboral) y medicina del trabajo."},{"id":88,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.3","subtema":"5.3. Servicio de prevención propio (SPP)","enunciado":"Una empresa de 540 trabajadores dedicada a servicios informáticos alega que no necesita servicio de prevención propio porque su actividad es de bajo riesgo y no figura en el Anexo I. ¿Es válida esa justificación?","opciones":{"A":"Sí, porque las empresas de oficinas están excluidas de constituir servicio de prevención propio.","B":"No, porque al superar los 500 trabajadores el SPP es obligatorio con independencia de la actividad.","C":"Sí, siempre que cuente con al menos cuatro delegados de prevención y un comité paritario.","D":"No, salvo que se integre en un servicio de prevención mancomunado con otras empresas vecinas."},"correcta":"B","explicacion":"La obligatoriedad del SPP en empresas de más de 500 trabajadores opera por el mero volumen de plantilla, sin requerir que la actividad esté incluida en el Anexo I (requisito que solo aplica al tramo de 250 a 500 trabajadores)."},{"id":89,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.4","subtema":"5.4. Servicio de prevención ajeno (SPA) y auditoría","enunciado":"Una empresa de 60 trabajadores donde el empresario no asume la prevención ni existen trabajadores designados con capacidad suficiente debe organizar su acción preventiva. ¿Qué modalidad debe utilizar?","opciones":{"A":"Asumir la dirección personalmente mediante un cursillo básico de diez horas lectivas.","B":"Constituir obligatoriamente un servicio de prevención propio con cinco especialistas internos.","C":"Dejar la gestión preventiva en suspenso hasta que se alcancen los cien trabajadores.","D":"Recurrir a uno o varios servicios de prevención ajenos que cubran las actividades necesarias."},"correcta":"D","explicacion":"El empresario debe recurrir a uno o varios servicios de prevención ajenos cuando la designación de trabajadores sea insuficiente y no sea obligatorio el SPP, o cuando exista una asunción parcial de la actividad preventiva."},{"id":90,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.4","subtema":"5.4. Servicio de prevención ajeno (SPA) y auditoría","enunciado":"Una entidad especializada solicita acreditación para actuar como servicio de prevención ajeno, pero solo dispone de técnicos superiores en seguridad, higiene y ergonomía, careciendo de medicina del trabajo y psicosociología aplicada. ¿Cumple la exigencia legal?","opciones":{"A":"Sí, porque un servicio ajeno necesita cubrir dos especialidades igual que un servicio propio.","B":"No, porque requiere las cinco especialidades con al menos un técnico superior en cada una.","C":"Sí, siempre que subcontrate la medicina laboral con una mutua colaboradora mercantil.","D":"No, porque los servicios ajenos requieren únicamente técnicos intermedios con experiencia."},"correcta":"B","explicacion":"Los SPA deben contar con las especialidades preventivas de medicina del trabajo, seguridad en el trabajo, higiene industrial, ergonomía y psicosociología aplicada, aportando como mínimo un técnico de nivel superior por cada una."},{"id":91,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.4","subtema":"5.4. Servicio de prevención ajeno (SPA) y auditoría","enunciado":"Un servicio de prevención ajeno pretende ofrecer sus servicios a una constructora de la que es socio financiero mayoritario, además de venderle maquinaria pesada. ¿Qué requisito legal de los SPA impide esta situación?","opciones":{"A":"La exigencia de contar con un mínimo de diez trabajadores en cada provincia española.","B":"La obligación de depender orgánicamente de los sindicatos representativos del sector.","C":"La necesidad de aprobar un plan de autoprotección conjunto antes de firmar contratos.","D":"La prohibición de mantener vinculaciones comerciales, financieras o de otro tipo con la empresa concertada."},"correcta":"D","explicacion":"Para actuar como SPA, la entidad no puede mantener con las empresas concertadas vinculaciones comerciales, financieras o de cualquier otro tipo distintas a las propias de su actuación como servicio de prevención."},{"id":92,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.4","subtema":"5.4. Servicio de prevención ajeno (SPA) y auditoría","enunciado":"Una empresa de 150 trabajadores ha designado a un empleado para cubrir seguridad e higiene y ha concertado únicamente la vigilancia de la salud con un servicio de prevención ajeno. ¿Qué obligación periódica de control le afecta por no concertar la totalidad con un SPA?","opciones":{"A":"Someter su sistema de prevención a una auditoría cada cinco años o si lo pide la autoridad laboral.","B":"Realizar una auditoría financiera anual ante el comité de empresa y los delegados sindicales.","C":"Contratar un segundo servicio de prevención ajeno que supervise exclusivamente al primero.","D":"Repetir íntegramente la evaluación inicial de riesgos cada seis meses en todos los puestos."},"correcta":"A","explicacion":"Las empresas que no concierten la totalidad de las actividades preventivas con un servicio de prevención ajeno deben someter su sistema de prevención al control de una auditoría cada cinco años o cuando lo requiera la autoridad laboral."},{"id":93,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.4","subtema":"5.4. Servicio de prevención ajeno (SPA) y auditoría","enunciado":"Una empresa de 35 trabajadores ha concertado íntegramente todas sus actividades preventivas (evaluación, planificación, formación y vigilancia de la salud) con un único servicio de prevención ajeno. ¿Está obligada a realizar la auditoría quinquenal de su sistema?","opciones":{"A":"Sí, porque toda empresa con más de veinticinco empleados pasa auditoría cada cinco años.","B":"Sí, salvo que el empresario haya cursado estudios universitarios de ingeniería técnica.","C":"No, porque esa exigencia solo aplica cuando no se concierta todo con un servicio ajeno.","D":"No, porque únicamente las administraciones públicas deben someterse a auditorías externas."},"correcta":"C","explicacion":"El documento especifica que la auditoría quinquenal es obligatoria para las empresas que no concierten la totalidad de sus actividades preventivas con un servicio de prevención ajeno."},{"id":94,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.4","subtema":"5.4. Servicio de prevención ajeno (SPA) y auditoría","enunciado":"Además de disponer de organización, personal y equipos suficientes y carecer de vínculos comerciales ajenos, ¿qué otras dos condiciones debe cumplir una entidad para actuar como SPA?","opciones":{"A":"Pertenecer al mismo grupo empresarial que la clienta y tener sede en el mismo edificio.","B":"Constituir una garantía que cubra su responsabilidad y asumir directamente las funciones concertadas.","C":"Estar participada por una mutua colaboradora y prestar servicio gratuito el primer año.","D":"Limitar su plantilla técnica a un único especialista superior compartido entre especialidades."},"correcta":"B","explicacion":"Los requisitos completos de los SPA son: disponer de organización, instalaciones, personal y equipos; constituir una garantía que cubra su eventual responsabilidad; no tener vinculaciones comerciales/financieras distintas; y asumir directamente el desarrollo de las funciones concertadas del art. 31.3 LPRL."},{"id":95,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.4","subtema":"5.4. Servicio de prevención ajeno (SPA) y auditoría","enunciado":"Una empresa contrata a dos servicios de prevención ajenos distintos: uno para las especialidades técnicas y otro para medicina del trabajo. ¿Qué exigencia organizativa impone la normativa en este supuesto?","opciones":{"A":"Que ambos servicios se fusionen jurídicamente en un único servicio mancomunado local.","B":"Que la empresa designe adicionalmente a cuatro trabajadores con dedicación exclusiva.","C":"Que el comité de seguridad y salud asuma la coordinación médica de los expedientes.","D":"Que ambos servicios de prevención ajenos colaboren entre sí cuando resulte necesario."},"correcta":"D","explicacion":"El apartado 5.4 establece que cuando el empresario recurra a uno o varios servicios de prevención ajenos, estos deberán colaborar entre sí cuando sea necesario."},{"id":96,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.5","subtema":"5.5. Servicio de prevención mancomunado, vigilancia de la salud y mutuas","enunciado":"Tres talleres de confección situados en la misma ciudad pertenecen al mismo sector textil y deciden unir recursos para crear un servicio de prevención común. ¿Es posible legalmente?","opciones":{"A":"Sí, porque pertenecen a un mismo sector productivo y pueden crear un servicio común.","B":"No, porque esa modalidad exige que todas las empresas compartan un mismo edificio físico.","C":"No, porque la gestión mancomunada está reservada a grupos empresariales con un mismo titular.","D":"Sí, pero previa autorización de la Inspección de Trabajo por superar los tres centros."},"correcta":"A","explicacion":"Pueden constituir un servicio de prevención mancomunado varias empresas que pertenezcan a un mismo sector productivo o que desarrollen sus actividades en un mismo edificio o área geográfica determinada."},{"id":97,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.5","subtema":"5.5. Servicio de prevención mancomunado, vigilancia de la salud y mutuas","enunciado":"En un centro de negocios de seis plantas conviven una asesoría fiscal, una agencia de viajes y una empresa informática. Aunque son de sectores distintos, quieren compartir un servicio de prevención mancomunado. ¿Pueden hacerlo?","opciones":{"A":"No, porque el servicio mancomunado requiere pertenecer siempre al mismo convenio sectorial.","B":"No, porque las empresas de servicios administrativos tienen prohibido compartir servicios preventivos.","C":"Sí, porque desarrollan sus actividades en un mismo edificio o área geográfica determinada.","D":"Sí, siempre que el edificio cuente con más de mil trabajadores repartidos entre todas."},"correcta":"C","explicacion":"El servicio de prevención mancomunado es válido tanto cuando las empresas pertenecen al mismo sector productivo como cuando, aun siendo de sectores distintos, comparten un mismo edificio o área geográfica determinada."},{"id":98,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.5","subtema":"5.5. Servicio de prevención mancomunado, vigilancia de la salud y mutuas","enunciado":"Al incorporarse a una empresa comercial, el empresario ofrece a un trabajador el reconocimiento médico anual, pero este prefiere no realizarlo. ¿Puede rechazar legalmente dicha prueba médica?","opciones":{"A":"No, porque la vigilancia de la salud resulta obligatoria en cualquier puesto contratado.","B":"No, porque rechazar el reconocimiento médico constituye causa de despido disciplinario.","C":"Sí, siempre que firme un documento renunciando también a las medidas colectivas.","D":"Sí, porque el reconocimiento médico es voluntario para el trabajador salvo exigencia legal."},"correcta":"D","explicacion":"El empresario está obligado a ofrecer el reconocimiento médico a sus trabajadores, pero para estos su realización es voluntaria y pueden rechazarlo, salvo en los supuestos en que venga establecido por ley."},{"id":99,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.5","subtema":"5.5. Servicio de prevención mancomunado, vigilancia de la salud y mutuas","enunciado":"Una mutua colaboradora con la Seguridad Social pretende crear una sociedad mercantil participada con su patrimonio histórico para actuar como servicio de prevención ajeno en el mercado. Según el artículo 32 de la LPRL, ¿es legal?","opciones":{"A":"Sí, siempre que cuente con las cinco especialidades preventivas y cinco técnicos superiores.","B":"No, porque la ley prohíbe a las mutuas desarrollar funciones de SPA o participar en esas sociedades.","C":"Sí, si únicamente ofrece servicios a empresas pequeñas de hasta veinticinco trabajadores.","D":"No, salvo que obtenga autorización expresa del comité de seguridad y salud de cada empresa."},"correcta":"B","explicacion":"Según el artículo 32 de la LPRL, las mutuas colaboradoras con la Seguridad Social tienen prohibido desarrollar las funciones de los servicios de prevención ajenos y participar con cargo a su patrimonio histórico en el capital social de sociedades mercantiles de prevención."},{"id":100,"temaId":"tema-5","tema":"Epígrafe 5. La organización de la acción preventiva","subtemaId":"5.5","subtema":"5.5. Servicio de prevención mancomunado, vigilancia de la salud y mutuas","enunciado":"Una trabajadora de una empresa con exposición laboral en la que la normativa exige vigilancia médica específica se niega a pasar el reconocimiento alegando el principio general de voluntariedad. ¿Qué establece la regla estudiada?","opciones":{"A":"Que prevalece siempre la negativa individual aunque exista una exigencia legal expresa.","B":"Que el reconocimiento debe sustituirse por una declaración jurada del delegado sindical.","C":"Que la voluntariedad decae cuando la realización del reconocimiento viene establecida por ley.","D":"Que el empresario queda eximido incluso de ofrecer el reconocimiento médico en adelante."},"correcta":"C","explicacion":"El principio general es que el empresario debe ofrecer la vigilancia de la salud y el trabajador puede rechazarla por ser voluntaria, con la excepción expresa de los casos en que su realización venga establecida por ley."},{"id":101,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.1","subtema":"6.1. Delegados de prevención: elección, número y competencias","enunciado":"Una empresa cuenta con una plantilla de 249 trabajadores (entre indefinidos, temporales de nueve meses y becarios con contrato de un año). ¿Cuántos delegados de prevención corresponde elegir en este centro de trabajo?","opciones":{"A":"Dos delegados de prevención elegidos entre los miembros del comité de empresa.","B":"Tres delegados de prevención, al situarse la plantilla entre 101 y 500 trabajadores.","C":"Cuatro delegados de prevención, al computarse también los contratos de carácter temporal.","D":"Un delegado de prevención elegido directamente entre los delegados de personal."},"correcta":"B","explicacion":"Conforme a la escala legal del tema, a las empresas de 101 a 500 trabajadores les corresponden 3 delegados de prevención (tal como se aplica también en el ejercicio práctico sobre OREJEVO, SA)."},{"id":102,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.1","subtema":"6.1. Delegados de prevención: elección, número y competencias","enunciado":"En una empresa de 38 trabajadores se elige a un delegado de prevención. ¿Cómo se designa a esta persona representante en materia preventiva?","opciones":{"A":"Por votación directa de la dirección entre los técnicos con mayor formación preventiva.","B":"Por sorteo anual realizado en la primera reunión del comité de seguridad y salud.","C":"Por libre designación de la mutua colaboradora tras evaluar los puestos de trabajo.","D":"Por y entre los delegados de personal elegidos previamente como representantes."},"correcta":"D","explicacion":"Los delegados de prevención son elegidos por y entre los representantes del personal; en concreto, en empresas de 31 a 49 trabajadores corresponde 1 delegado elegido entre los delegados de personal."},{"id":103,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.1","subtema":"6.1. Delegados de prevención: elección, número y competencias","enunciado":"Una empresa ha crecido hasta alcanzar 850 trabajadores en plantilla. ¿Qué número exacto de delegados de prevención le corresponde tener según la tabla legal?","opciones":{"A":"Cuatro delegados de prevención, al estar comprendida entre 501 y 1000 trabajadores.","B":"Tres delegados de prevención, al no haber superado el umbral de los mil trabajadores.","C":"Cinco delegados de prevención, aplicando el tramo inmediatamente superior al de 500.","D":"Seis delegados de prevención, por duplicarse el número mínimo del comité paritario."},"correcta":"A","explicacion":"La escala establece: 50 a 100 -\u003e 2; 101 a 500 -\u003e 3; 501 a 1000 -\u003e 4; 1001 a 2000 -\u003e 5; 2001 a 3000 -\u003e 6; 3001 a 4000 -\u003e 7; y 4001 en adelante -\u003e 8."},{"id":104,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.1","subtema":"6.1. Delegados de prevención: elección, número y competencias","enunciado":"La dirección de una empresa impide que los delegados de prevención visiten los puestos de trabajo del almacén y les prohíbe acompañar al técnico durante la evaluación de riesgos. ¿Actúa conforme a derecho?","opciones":{"A":"Sí, porque las actuaciones técnicas de evaluación tienen carácter reservado hasta su aprobación.","B":"Sí, porque la participación laboral se canaliza mediante la entrega posterior del informe final.","C":"No, porque la vigilancia in situ de las condiciones y asistir a las valoraciones son facultades suyas.","D":"No, porque el comité de empresa debe aprobar previamente cualquier recorrido por el almacén."},"correcta":"C","explicacion":"Entre las competencias legales de los delegados de prevención figuran expresamente realizar visitas a los lugares de trabajo para vigilar las condiciones y acompañar a los técnicos en las evaluaciones de riesgos y a los inspectores de trabajo en sus visitas."},{"id":105,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.1","subtema":"6.1. Delegados de prevención: elección, número y competencias","enunciado":"Una empresa va a implantar nuevos turnos nocturnos y modificar la organización del trabajo que afecta a la seguridad (artículo 33 LPRL). ¿Qué obligación tiene respecto a los delegados de prevención antes de ejecutar el cambio?","opciones":{"A":"Comunicarlo únicamente por correo electrónico una vez iniciados los nuevos turnos.","B":"Consultar previamente a los delegados de prevención antes de ejecutar esas decisiones.","C":"Solicitar autorización vinculante a la mutua colaboradora con un mes de antelación.","D":"Limitar la consulta exclusivamente a los delegados que pertenezcan al turno de noche."},"correcta":"B","explicacion":"Los delegados de prevención tienen la competencia de ser consultados por el empresario, con carácter previo a su ejecución, acerca de las decisiones relativas a la planificación y organización del trabajo (art. 33 LPRL)."},{"id":106,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.1","subtema":"6.1. Delegados de prevención: elección, número y competencias","enunciado":"En una nave se detecta un riesgo grave e inminente para la salud de los operarios y el empresario se niega a detener la máquina. ¿Qué actuación concreta compete al delegado de prevención según el tema?","opciones":{"A":"Imponer directamente una sanción económica a la dirección sin acudir a ningún órgano.","B":"Modificar por sí mismo los esquemas eléctricos de la máquina fuera del horario laboral.","C":"Disolver el servicio de prevención ajeno y contratar de inmediato a otro distinto.","D":"Proponer al órgano de representación de los trabajadores la paralización de actividades."},"correcta":"D","explicacion":"Entre las competencias de los delegados de prevención se encuentra proponer al órgano de representación de los trabajadores la paralización de las actividades en caso de riesgo grave e inminente."},{"id":107,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.1","subtema":"6.1. Delegados de prevención: elección, número y competencias","enunciado":"Los delegados de prevención de una fábrica consideran que las medidas adoptadas y los medios utilizados por el empresario son claramente insuficientes para garantizar la seguridad. Además de sus competencias internas, ¿a qué organismo externo pueden recurrir?","opciones":{"A":"A la Inspección de Trabajo y Seguridad Social para denunciar dicha insuficiencia.","B":"Al ayuntamiento del municipio para que clausure definitivamente la licencia fiscal.","C":"A la mutua colaboradora para que sustituya por decreto al jefe de emergencias.","D":"Al servicio de prevención mancomunado de las empresas vecinas del polígono."},"correcta":"A","explicacion":"El recuadro sobre seguridad y salud en el trabajo señala que los trabajadores y sus representantes pueden recurrir a la Inspección de Trabajo y Seguridad Social si consideran insuficientes las medidas y medios empleados por el empresario."},{"id":108,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.1","subtema":"6.1. Delegados de prevención: elección, número y competencias","enunciado":"Una compañía multinacional tiene un centro de trabajo con 3500 trabajadores en plantilla. ¿Cuántos delegados de prevención le corresponden conforme a la tabla legal?","opciones":{"A":"Siete delegados de prevención.","B":"Seis delegados de prevención.","C":"Ocho delegados de prevención.","D":"Cinco delegados de prevención."},"correcta":"A","explicacion":"Según la escala oficial, entre 3001 y 4000 trabajadores corresponden 7 delegados de prevención (de 2001 a 3000 son 6, y de 4001 en adelante son 8)."},{"id":109,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.1","subtema":"6.1. Delegados de prevención: elección, número y competencias","enunciado":"En una empresa de 22 trabajadores solo existe un delegado de personal elegido por la plantilla. ¿Quién ejerce en ella las funciones de delegado de prevención?","opciones":{"A":"Nadie, porque por debajo de cincuenta trabajadores no existen delegados de prevención.","B":"El trabajador con mayor antigüedad designado directamente por la dirección de la empresa.","C":"Un técnico del servicio de prevención ajeno que visita mensualmente las instalaciones.","D":"El mismo trabajador que ostenta el cargo de delegado de personal en la empresa."},"correcta":"D","explicacion":"En las empresas de 11 a 30 trabajadores corresponde un delegado de prevención, que será precisamente el propio delegado de personal."},{"id":110,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.1","subtema":"6.1. Delegados de prevención: elección, número y competencias","enunciado":"Cuando un inspector de trabajo acude a una empresa de construcción para revisar las condiciones de los andamios, ¿tienen derecho los delegados de prevención a participar en esa visita?","opciones":{"A":"No, porque las visitas inspectivas deben realizarse siempre sin presencia de la plantilla.","B":"No, salvo que la inspección haya sido solicitada previamente por el propio empresario.","C":"Sí, porque una de sus competencias legales es acompañar a los inspectores en sus visitas.","D":"Sí, pero únicamente en calidad de oyentes sin poder informar sobre las condiciones vistas."},"correcta":"C","explicacion":"Una competencia expresa de los delegados de prevención es acompañar a los inspectores de trabajo y seguridad social en las visitas y verificaciones que realicen en los centros de trabajo."},{"id":111,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.2","subtema":"6.2. Garantías de los delegados de prevención y crédito horario","enunciado":"Una empresa tramita un expediente de regulación de empleo (ERE) por causas económicas que afecta a la sección de montaje donde trabaja Jesús, delegado de prevención. ¿Qué garantía laboral específica le protege en esta situación?","opciones":{"A":"Prioridad de permanencia en la empresa frente a otros trabajadores afectados por el expediente.","B":"Reserva obligatoria de su puesto durante dos años tras la extinción del contrato laboral.","C":"Derecho a percibir una indemnización especial superior por su condición representativa previa.","D":"Ampliación automática al doble de su crédito horario mensual mientras dure la negociación."},"correcta":"A","explicacion":"Los delegados de prevención tienen garantía de prioridad de permanencia en la organización si la empresa incurre en un expediente de regulación de empleo por causas tecnológicas o económicas."},{"id":112,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.2","subtema":"6.2. Garantías de los delegados de prevención y crédito horario","enunciado":"Un delegado de prevención cesa en su cargo tras finalizar su mandato. Seis meses después, el empresario lo sanciona como represalia por una denuncia preventiva que presentó durante su mandato. ¿Es legal esa sanción?","opciones":{"A":"Sí, porque las garantías representativas terminan el mismo día en que finaliza el mandato.","B":"Sí, siempre que el empresario alegue razones de organización productiva interna.","C":"No, porque la protección frente a despidos o sanciones por su función dura hasta un año después.","D":"No, salvo que la sanción haya sido aprobada previamente por el servicio de prevención ajeno."},"correcta":"C","explicacion":"Los delegados no pueden ser despedidos ni sancionados durante su mandato ni durante el año siguiente al cese de sus funciones por acciones relacionadas con su condición de representantes preventivos (aunque sí pueden ser despedidos por causas disciplinarias)."},{"id":113,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.2","subtema":"6.2. Garantías de los delegados de prevención y crédito horario","enunciado":"Un delegado de prevención comete de manera reiterada faltas graves de puntualidad y desobediencia laboral totalmente ajenas a su labor preventiva. ¿Impiden sus garantías que la empresa pueda despedirlo?","opciones":{"A":"Sí, porque gozan de inmunidad absoluta ante cualquier tipo de despido durante su mandato.","B":"No, porque sí pueden ser despedidos cuando concurren causas disciplinarias justificadas.","C":"Sí, salvo que la empresa cuente con menos de cien trabajadores en el centro de trabajo.","D":"No, pero antes debe renunciar voluntariamente al crédito de horas mensuales retribuidas."},"correcta":"B","explicacion":"La garantía frente a despidos y sanciones protege las actuaciones vinculadas al ejercicio de sus funciones de representación en materia preventiva, pero el documento aclara que sí pueden ser despedidos por causas disciplinarias."},{"id":114,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.2","subtema":"6.2. Garantías de los delegados de prevención y crédito horario","enunciado":"En una empresa de 320 trabajadores, un delegado de prevención solicita utilizar sus horas mensuales retribuidas para tareas representativas. ¿De cuántas horas de crédito mensual dispone según la escala legal?","opciones":{"A":"15 horas mensuales retribuidas.","B":"20 horas mensuales retribuidas.","C":"35 horas mensuales retribuidas.","D":"30 horas mensuales retribuidas."},"correcta":"D","explicacion":"La escala de crédito horario mensual retribuido establece: hasta 100 trabajadores -\u003e 15 h; de 101 a 250 -\u003e 20 h; de 251 a 500 -\u003e 30 h; de 501 a 750 -\u003e 35 h; y a partir de 751 -\u003e 40 h."},{"id":115,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.2","subtema":"6.2. Garantías de los delegados de prevención y crédito horario","enunciado":"Durante un mes, un delegado de prevención de una empresa de 180 trabajadores asiste durante 6 horas a una reunión del comité de seguridad y salud convocada por la empresa. ¿Cómo se computa ese tiempo respecto a sus 20 horas de crédito mensual?","opciones":{"A":"Computa como tiempo de trabajo efectivo sin consumir necesariamente su crédito horario mensual.","B":"Se descuenta íntegramente de su salario base por no corresponder a producción directa.","C":"Debe recuperarse en sábado salvo que el delegado renuncie a publicar folletos informativos.","D":"Se resta por duplicado de su crédito horario cuando la reunión excede de dos horas seguidas."},"correcta":"A","explicacion":"Entre las garantías de los delegados de prevención figura expresamente que se computará como tiempo de trabajo efectivo el tiempo asignado a reuniones en materia de seguridad y salud laboral."},{"id":116,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.2","subtema":"6.2. Garantías de los delegados de prevención y crédito horario","enunciado":"Si se comete una infracción grave o muy grave en una empresa, ¿qué garantía procesal asiste al delegado de prevención implicado?","opciones":{"A":"Solicitar la suspensión cautelar de la sanción ante el servicio de prevención ajeno.","B":"Ser oído por el comité de empresa y el resto de delegados, además del implicado.","C":"Duplicar su crédito horario mensual retribuido durante la tramitación del expediente.","D":"Trasladar la resolución disciplinaria a la reunión trimestral del comité paritario."},"correcta":"B","explicacion":"Una de las garantías recogidas en el cuadro del tema es ser oídos por el comité de empresa y el resto de delegados (además del delegado de prevención implicado) si se comete una infracción grave o muy grave."},{"id":117,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.3","subtema":"6.3. Comité de seguridad y salud: naturaleza, composición y competencias","enunciado":"Una empresa cuenta con 45 trabajadores en plantilla y sus delegados sindicales reclaman constituir un comité de seguridad y salud. ¿Es obligatorio constituirlo legalmente en este caso?","opciones":{"A":"Sí, porque cualquier empresa con más de treinta trabajadores debe tener comité propio.","B":"Sí, siempre que al menos uno de los trabajadores desarrolle tareas incluidas en el Anexo I.","C":"No, porque cualquier comité requiere un mínimo de cien trabajadores con contrato indefinido.","D":"No, porque la obligación legal de constituirlo se aplica en empresas de 50 o más trabajadores."},"correcta":"D","explicacion":"El comité de seguridad y salud se constituirá obligatoriamente en todas las empresas o centros de trabajo que cuenten con 50 trabajadores o más."},{"id":118,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.3","subtema":"6.3. Comité de seguridad y salud: naturaleza, composición y competencias","enunciado":"En una empresa de 134 trabajadores existen dos delegadas de prevención (Marisa y Llanos) que deciden reunirse ellas dos solas como «comité de seguridad y salud» para aprobar medidas correctoras sobre unas máquinas. ¿Qué error cometen?","opciones":{"A":"Que el comité es paritario y debe reunir a delegados y representantes del empresario en igual número.","B":"Que con 134 trabajadores no pueden constituir comité hasta alcanzar la cifra de 250 empleados.","C":"Que el comité solo puede reunirse cuando ha ocurrido un accidente mortal en la planta.","D":"Que los acuerdos sobre maquinaria corresponden en exclusiva al equipo de segunda intervención."},"correcta":"A","explicacion":"Tal como se analiza en En qué nos equivocamos del libro, el comité de seguridad y salud es un órgano paritario formado por los delegados de prevención y por el empresario o sus representantes en igual número. Dos delegadas solas no forman comité."},{"id":119,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.3","subtema":"6.3. Comité de seguridad y salud: naturaleza, composición y competencias","enunciado":"¿Qué significa jurídicamente que el comité de seguridad y salud sea un órgano colegiado dentro de la estructura participativa de la empresa?","opciones":{"A":"Que está integrado únicamente por técnicos superiores titulados en prevención laboral.","B":"Que actúa de forma conjunta y toma sus acuerdos mediante las mayorías establecidas al efecto.","C":"Que depende jerárquicamente del ministerio laboral y adopta decisiones unipersonales.","D":"Que se reúne únicamente una vez al año para elegir al jefe de emergencias del centro."},"correcta":"B","explicacion":"El texto diferencia entre órgano paritario (igual número de representantes de trabajadores y empresario) y órgano colegiado (el que actúa y toma sus acuerdos de forma conjunta y con las mayorías establecidas al efecto)."},{"id":120,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.3","subtema":"6.3. Comité de seguridad y salud: naturaleza, composición y competencias","enunciado":"En una empresa de 249 trabajadores con 3 delegados de prevención, se constituye el comité de seguridad y salud. ¿Por cuántos miembros con derecho a voto estará compuesto en total?","opciones":{"A":"Por tres miembros en total, correspondientes únicamente a los delegados de prevención.","B":"Por seis miembros en total: los tres delegados de prevención y tres representantes del empresario.","C":"Por cinco miembros en total: tres delegados de prevención, un técnico y un delegado sindical.","D":"Por nueve miembros en total, añadiendo a los responsables de los equipos de evacuación."},"correcta":"B","explicacion":"Al ser un órgano paritario compuesto por los delegados de prevención y el empresario o sus representantes en número igual, si hay 3 delegados habrá también 3 representantes empresariales, sumando 6 miembros con voto."},{"id":121,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.3","subtema":"6.3. Comité de seguridad y salud: naturaleza, composición y competencias","enunciado":"A la reunión trimestral del comité de seguridad y salud asisten, además de sus miembros paritarios, un delegado sindical y el responsable técnico del servicio de prevención propio. ¿En qué condición participan estos dos últimos?","opciones":{"A":"Con voz pero sin voto en las votaciones que adopte el comité.","B":"Con voz y con voto decisorio de calidad en caso de empate técnico.","C":"Sin voz ni voto, limitándose a levantar acta escrita de los acuerdos.","D":"Únicamente como observadores externos sin acceso a la documentación preventiva."},"correcta":"A","explicacion":"En las reuniones del comité de seguridad y salud podrán participar, con voz pero sin voto, los delegados sindicales y los responsables técnicos de la prevención en la empresa (que no estén incluidos en la composición paritaria)."},{"id":122,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.3","subtema":"6.3. Comité de seguridad y salud: naturaleza, composición y competencias","enunciado":"Una empresa fija en su reglamento interno que su comité de seguridad y salud se reunirá una sola vez al año salvo que ocurra un accidente grave. ¿Por qué incumple la normativa estudiada?","opciones":{"A":"Porque la ley obliga a celebrar reuniones mensuales con presencia de un inspector laboral.","B":"Porque las reuniones deben tener lugar cada semestre y exclusivamente a petición empresarial.","C":"Porque la periodicidad semanal es obligatoria en todas las empresas de más de 50 trabajadores.","D":"Porque el comité debe reunirse trimestralmente y siempre que lo solicite alguna de las partes."},"correcta":"D","explicacion":"El comité de seguridad y salud se reunirá obligatoriamente con carácter trimestral y además siempre que lo solicite alguna de las partes representadas en él."},{"id":123,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.3","subtema":"6.3. Comité de seguridad y salud: naturaleza, composición y competencias","enunciado":"El servicio de prevención propio ha redactado la memoria y la programación anual de sus actividades preventivas, pero la dirección se niega a entregarla al comité de seguridad y salud. ¿Qué competencia del comité se vulnera?","opciones":{"A":"La competencia de designar unilateralmente al responsable técnico del servicio de prevención.","B":"La competencia de redactar e implantar las medidas correctoras en los centros de trabajo.","C":"La competencia de conocer e informar la memoria y programación anual de los servicios.","D":"La competencia de revisar los reconocimientos médicos individuales de la plantilla."},"correcta":"C","explicacion":"Entre las competencias del comité de seguridad y salud figuran expresamente conocer e informar de la memoria y programación anual de los servicios de prevención, así como acceder a la información y documentación necesaria y estar informado de sus acciones."},{"id":124,"temaId":"tema-6","tema":"Epígrafe 6. Los representantes de los trabajadores en materia preventiva","subtemaId":"6.3","subtema":"6.3. Comité de seguridad y salud: naturaleza, composición y competencias","enunciado":"¿Cuál de las siguientes actuaciones corresponde propiamente al comité de seguridad y salud y no únicamente a un delegado de prevención de forma individual?","opciones":{"A":"Acompañar en solitario al inspector de trabajo cuando visita un taller de soldadura.","B":"Participar colegiadamente en la elaboración, puesta en práctica y evaluación de los planes de PRL.","C":"Ejercer la prioridad de permanencia frente a un expediente de regulación de empleo económico.","D":"Disponer de un crédito horario individual de treinta horas retribuidas al mes."},"correcta":"B","explicacion":"Participar en la elaboración, puesta en práctica y evaluación de los planes y programas de prevención de riesgos es una competencia colectiva del comité de seguridad y salud; las demás opciones corresponden al estatuto y competencias individuales de los delegados de prevención."},{"id":125,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.1","subtema":"7.1. Plan de autoprotección: concepto y contenido mínimo (RD 393/2007)","enunciado":"Según el artículo 20 de la LPRL, ¿qué tres ámbitos concretos de actuación debe abarcar el análisis de posibles situaciones de emergencia que realice el empresario?","opciones":{"A":"Primeros auxilios, lucha contra incendios y evacuación de los trabajadores.","B":"Seguridad vial exterior, vigilancia médica periódica y auditoría contable anual.","C":"Prevención de riesgos psicosociales, ergonomía postural y control de turnos nocturnos.","D":"Formación sindical, gestión de residuos urbanos y mantenimiento de vehículos propios."},"correcta":"A","explicacion":"El artículo 20 de la LPRL exige al empresario analizar las posibles situaciones de emergencia y adoptar las medidas necesarias en materia de primeros auxilios, lucha contra incendios y evacuación de los trabajadores."},{"id":126,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.1","subtema":"7.1. Plan de autoprotección: concepto y contenido mínimo (RD 393/2007)","enunciado":"En un hotel se encarga el plan de autoprotección al recepcionista nocturno para ahorrar costes, aunque el propietario asume la responsabilidad de implantarlo. ¿Por qué es incorrecto ese procedimiento según el RD 393/2007?","opciones":{"A":"Porque el plan debe ser redactado y firmado por la autoridad municipal competente.","B":"Porque la implantación corresponde al comité de empresa y no al empresario titular.","C":"Porque aunque el empresario es responsable del plan, debe redactarlo y firmarlo un técnico competente.","D":"Porque los hoteles de menos de quinientas habitaciones están exentos de elaborar cualquier protocolo."},"correcta":"C","explicacion":"El empresario es responsable de la elaboración, implantación, mantenimiento y revisión del plan de autoprotección, pero su redacción y firma deben correr necesariamente a cargo de un técnico competente."},{"id":127,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.1","subtema":"7.1. Plan de autoprotección: concepto y contenido mínimo (RD 393/2007)","enunciado":"Al revisar el índice de un plan de autoprotección basado en el RD 393/2007, ¿qué contenidos deben figurar en el Capítulo I y en el Capítulo II respectivamente?","opciones":{"A":"En el I el plan de evacuación general y en el II los teléfonos externos de urgencia.","B":"En el I la identificación de titulares y emplazamiento, y en el II la descripción de actividad y medio físico.","C":"En el I el inventario de medios de protección y en el II los simulacros realizados en el año.","D":"En el I la evaluación de los riesgos laborales y en el II el programa de mantenimiento técnico."},"correcta":"B","explicacion":"Según la tabla del RD 393/2007, el Capítulo I recoge la identificación de los titulares y el emplazamiento de la actividad, y el Capítulo II describe la actividad y el medio físico en el que se desarrolla."},{"id":128,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.1","subtema":"7.1. Plan de autoprotección: concepto y contenido mínimo (RD 393/2007)","enunciado":"Dentro de los nueve capítulos obligatorios del plan de autoprotección (RD 393/2007), ¿dónde se ubica el «Plan de actuación ante emergencias»?","opciones":{"A":"En el Capítulo III, inmediatamente antes del inventario de medios de autoprotección.","B":"En el Capítulo IX, como cierre definitivo tras el mantenimiento de instalaciones.","C":"En el Capítulo I, junto a la identificación jurídica de los titulares del centro.","D":"En el Capítulo VI, después del programa de mantenimiento de instalaciones."},"correcta":"D","explicacion":"La estructura del RD 393/2007 sitúa el Plan de actuación ante emergencias en el Capítulo VI, tras el Capítulo III (riesgos), IV (medidas y medios de autoprotección) y V (mantenimiento de instalaciones)."},{"id":129,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.1","subtema":"7.1. Plan de autoprotección: concepto y contenido mínimo (RD 393/2007)","enunciado":"Una empresa elabora su plan de autoprotección detallando riesgos, medios y emergencias, pero omite prever cómo coordinar su plan con los planes de emergencia municipales o de ámbito superior, así como su actualización futura. ¿Qué dos capítulos del RD 393/2007 faltan?","opciones":{"A":"Los capítulos II (descripción de la actividad) y IV (inventario de medios propios).","B":"Los capítulos III (análisis de riesgos) y V (programa de mantenimiento de instalaciones).","C":"Los capítulos VII (integración en otros de ámbito superior) y IX (mantenimiento y actualización).","D":"Los capítulos I (emplazamiento de la actividad) y VIII (implantación del plan de autoprotección)."},"correcta":"C","explicacion":"El Capítulo VII trata la integración del plan de autoprotección en otros de ámbito superior, el VIII aborda su implantación y el IX regula el mantenimiento de la eficacia y actualización del plan."},{"id":130,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.1","subtema":"7.1. Plan de autoprotección: concepto y contenido mínimo (RD 393/2007)","enunciado":"¿Cuál de las siguientes descripciones define con exactitud la finalidad global de un plan de autoprotección?","opciones":{"A":"Sustituir al plan de prevención de riesgos laborales cuando la empresa supera los 50 empleados.","B":"Enumerar únicamente las sanciones disciplinarias aplicables si se obstruye una puerta de salida.","C":"Garantizar la cobertura económica de las bajas médicas mediante conciertos con mutuas externas.","D":"Recoger la identificación de riesgos, acciones de prevención y control, y el protocolo ante emergencias."},"correcta":"D","explicacion":"El plan de autoprotección es el documento que recoge la identificación y evaluación de riesgos, las acciones y medidas para su prevención y control, así como el protocolo de actuación en caso de emergencia."},{"id":131,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.2","subtema":"7.2. Plan de actuación ante emergencias y clasificación de emergencias","enunciado":"En una oficina comienza a arder una papelera por un cortocircuito leve. Dos trabajadores formados toman el extintor del pasillo y apagan el fuego en menos de un minuto sin necesidad de evacuar ni llamar a los bomberos. ¿Cómo se clasifica esta emergencia?","opciones":{"A":"Emergencia parcial, porque requiere equipos de zonas colindantes para evitar su propagación.","B":"Conato de emergencia, al poder controlarse de forma sencilla y rápida con medios locales.","C":"Emergencia general, porque todo inicio de incendio implica activar los medios externos de socorro.","D":"Evacuación preventiva, al haberse visto comprometida la integridad estructural del edificio."},"correcta":"B","explicacion":"Un conato de emergencia es una situación que puede ser controlada y solucionada de forma sencilla y rápida por el personal y los medios de protección del propio local."},{"id":132,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.2","subtema":"7.2. Plan de actuación ante emergencias y clasificación de emergencias","enunciado":"En un laboratorio químico se produce un derrame en la sala de reactivos que exige intervenir a los equipos especiales de ese sector específico, pero el incidente queda contenido allí sin afectar a otras áreas ni a terceras personas. ¿De qué tipo de emergencia se trata?","opciones":{"A":"Conato de emergencia.","B":"Emergencia general.","C":"Emergencia parcial.","D":"Situación de alerta previa."},"correcta":"C","explicacion":"La emergencia parcial requiere la actuación de equipos especiales del sector de actividad específico (biológico, químico, etc.), sus efectos se limitan a ese sector y no afecta a terceras personas."},{"id":133,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.2","subtema":"7.2. Plan de actuación ante emergencias y clasificación de emergencias","enunciado":"Un incendio se propaga por la nave principal de una fábrica superando la capacidad de los equipos internos, por lo que se solicita ayuda de los bomberos externos y se ordena desalojar las instalaciones. ¿Cómo se clasifica esta situación?","opciones":{"A":"Emergencia general, al precisar ayuda externa de socorro y evacuación.","B":"Conato de emergencia agravado, al intervenir el equipo de primera intervención.","C":"Emergencia parcial ampliada, al limitarse a un sector sin intervención externa.","D":"Riesgo trivial sobrevenido, que exige revisar el mantenimiento de los extintores."},"correcta":"A","explicacion":"La emergencia general es aquella para cuyo control se necesitan todos los equipos y medios de protección propios junto con la ayuda de medios de socorro y salvamento externos, comportando generalmente evacuaciones totales o parciales."},{"id":134,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.2","subtema":"7.2. Plan de actuación ante emergencias y clasificación de emergencias","enunciado":"Durante un incidente en una planta comercial, primero se avisa discretamente a los equipos de intervención para que se movilicen y, minutos después, al agravarse el suceso, se transmite un mensaje por megafonía a toda la plantilla. ¿Qué dos conceptos distintos ilustran esas acciones?","opciones":{"A":"Evacuación parcial en primer lugar y conato de emergencia en segundo término.","B":"Simulacro operativo primero y evaluación inicial del puesto de trabajo después.","C":"Emergencia general en la primera llamada y primeros auxilios en la segunda comunicación.","D":"Alerta en la movilización de los equipos y alarma en la comunicación a los trabajadores."},"correcta":"D","explicacion":"El documento distingue con claridad entre alerta (avisar a los equipos de intervención para movilizarlos cuando se produce una emergencia) y alarma (la comunicación de la emergencia a los trabajadores por medios técnicos o por el propio personal)."},{"id":135,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.2","subtema":"7.2. Plan de actuación ante emergencias y clasificación de emergencias","enunciado":"Una empresa rediseña su plan de actuación ante emergencias incluyendo mapas de las instalaciones, consignas para el personal y teléfonos de emergencia, pero olvida prever la formación periódica de los trabajadores y la realización de simulacros. ¿Qué parte exigida ha omitido?","opciones":{"A":"Capítulos iniciales relativos a la identificación jurídica de los titulares y el emplazamiento.","B":"Apartados propios de la clasificación de emergencias según intervengan ayudas externas.","C":"Elementos específicos del plan de evaluación de riesgos psicosociales de cada puesto.","D":"Elementos obligatorios del contenido mínimo del plan de actuación ante emergencias."},"correcta":"D","explicacion":"El contenido mínimo del plan de actuación ante emergencias incluye expresamente planes periódicos de formación y adiestramiento de los trabajadores, realización de simulacros, mantenimiento de instalaciones de protección, vías de evacuación y sistemas de emergencia, y actualizaciones del plan."},{"id":136,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.2","subtema":"7.2. Plan de actuación ante emergencias y clasificación de emergencias","enunciado":"En el caso práctico del libro sobre la empresa NO HAY PELIGRO, SA, la plantilla veterana ignora para qué sirve el protocolo de crisis, nunca ha ensayado una salida controlada y el estruendo fabril ocultaría la señal sonora. ¿Qué elementos esenciales faltan?","opciones":{"A":"La auditoría quinquenal de las mutuas y el concierto de un servicio mancomunado.","B":"La instrucción del personal, las prácticas periódicas y la perceptibilidad de los avisos.","C":"La elección del delegado de personal y el crédito horario de cuarenta horas mensuales.","D":"La clasificación de los riesgos según el código numérico del método William Fine."},"correcta":"B","explicacion":"Para que un plan de actuación ante emergencias sea operativo debe formar e informar a los trabajadores, realizar simulacros periódicos y contar con sistemas de aviso y alarma perceptibles pese a las condiciones reales de trabajo (como el ruido elevado)."},{"id":137,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.2","subtema":"7.2. Plan de actuación ante emergencias y clasificación de emergencias","enunciado":"Para la puesta en práctica efectiva de un plan de actuación ante emergencias, además de definir la estructura organizativa y los procedimientos de comunicación, ¿qué inventarios e información gráfica debe establecer la empresa?","opciones":{"A":"Inventario de herramientas manuales y fotografías del equipamiento de oficina.","B":"Listado de contratos temporales y organigrama salarial de los mandos intermedios.","C":"Mapas de instalaciones e inventario de medios de protección, alarma y vías de evacuación.","D":"Historial clínico de la plantilla y actas trimestrales del comité de seguridad y salud."},"correcta":"C","explicacion":"Entre las actuaciones para poner en práctica el plan figuran la estructura organizativa, los mapas de las instalaciones y edificaciones, el inventario de medios de protección, sistemas de alarma/aviso y vías de evacuación, recursos externos, procedimientos de comunicación y consignas para el personal."},{"id":138,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.2","subtema":"7.2. Plan de actuación ante emergencias y clasificación de emergencias","enunciado":"¿Cuál es el objetivo principal del plan de actuación ante emergencias, entendido como conjunto ordenado de acciones realizadas por el personal del centro de trabajo?","opciones":{"A":"Garantizar que la producción continúe sin interrupción mientras llegan las ayudas externas.","B":"Minimizar en lo posible los daños al personal, a las instalaciones y, en su caso, a los clientes.","C":"Sustituir por completo la necesidad de realizar evaluaciones de riesgos en cada puesto.","D":"Asignar responsabilidades penales individuales cuando falla algún equipo contra incendios."},"correcta":"B","explicacion":"El plan de actuación ante emergencias es el conjunto ordenado de acciones realizadas por el personal del centro ante una emergencia con el objetivo de minimizar en lo posible los daños al personal, a las instalaciones y, si es el caso, a los clientes."},{"id":139,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.3","subtema":"7.3. Estructura organizativa ante emergencias (equipos y jefe/centro)","enunciado":"Durante un incendio grave en una planta industrial, el director financiero pretende contradecir la orden de desalojo alegando pérdidas económicas. Conforme a la estructura del plan de emergencias, ¿quién ostenta la máxima autoridad en el centro durante la emergencia?","opciones":{"A":"El jefe de emergencias, encargado de declarar el tipo de emergencia y coordinar el plan.","B":"El responsable del equipo de primera intervención situado en la zona del siniestro.","C":"El delegado de prevención con mayor antigüedad dentro del comité de seguridad y salud.","D":"El operario encargado de atender el cuadro telefónico en el centro de comunicaciones."},"correcta":"A","explicacion":"El jefe de emergencias es la máxima autoridad en el centro durante la emergencia; declara el tipo de emergencia, coordina el plan enviando ayudas internas, recibe los partes de incidencias y coordina la ayuda externa."},{"id":140,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.3","subtema":"7.3. Estructura organizativa ante emergencias (equipos y jefe/centro)","enunciado":"¿Cuál es la composición mínima y la función esencial asignada al equipo de primera intervención dentro del plan de emergencias?","opciones":{"A":"Grupos de mínimo dos trabajadores con conocimientos básicos para controlar con medios de la zona.","B":"Un único trabajador designado por planta encargado exclusivamente de llamar al 112.","C":"Todos los miembros del comité de seguridad encargados de atender a los heridos graves.","D":"Personal externo contratado por el ayuntamiento para dirigir el tráfico en la vía pública."},"correcta":"A","explicacion":"El equipo de primera intervención está formado por grupos de un mínimo de dos trabajadores con conocimientos básicos en lucha contra incendios y emergencias, encargados de controlar la emergencia con los medios de la zona y colaborar con el equipo de segunda intervención y las ayudas externas."},{"id":141,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.3","subtema":"7.3. Estructura organizativa ante emergencias (equipos y jefe/centro)","enunciado":"En una emergencia parcial que no ha podido sofocarse de inmediato, entra en acción el equipo de segunda intervención. ¿Qué le diferencia específicamente del equipo de primera intervención?","opciones":{"A":"Que actúa únicamente en conatos leves utilizando extintores portátiles de la propia sala.","B":"Que se limita a comprobar en el punto de reunión si falta algún trabajador evacuado.","C":"Que colabora con el de primera intervención usando los medios de las zonas colindantes.","D":"Que asume la máxima autoridad del centro sustituyendo al jefe de emergencias en su cargo."},"correcta":"C","explicacion":"Mientras el equipo de primera intervención actúa con los medios de la propia zona, el equipo de segunda intervención colabora con él en el control de la emergencia aportando los medios de las zonas colindantes y colaborando con las ayudas exteriores."},{"id":142,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.3","subtema":"7.3. Estructura organizativa ante emergencias (equipos y jefe/centro)","enunciado":"¿A qué equipo concreto le corresponde comprobar que su sector ha quedado completamente vacío tras la salida del personal y controlar posteriormente a los evacuados en los puntos de reunión?","opciones":{"A":"Al equipo de primeros auxilios encargado de asistir a las personas lesionadas.","B":"Al equipo de segunda intervención responsable de los medios en zonas colindantes.","C":"Al equipo de alarma y evacuación bajo las órdenes previas del jefe de emergencias.","D":"Al centro de coordinación de emergencias ubicado en un recinto interno protegido."},"correcta":"C","explicacion":"El equipo de alarma y evacuación da la alarma en su sector por orden del jefe de emergencias, dirige el flujo hacia las salidas, ayuda a los ocupantes, comprueba que su zona queda vacía y controla a los evacuados en los puntos de reunión."},{"id":143,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.3","subtema":"7.3. Estructura organizativa ante emergencias (equipos y jefe/centro)","enunciado":"En una emergencia general con múltiples focos y necesidad de desalojo, según el esquema de actuación del plan de emergencias interior estudiado en el ejemplo 3 del libro, ¿qué equipos y recursos intervienen?","opciones":{"A":"Primera intervención junto con los representantes sindicales del centro laboral.","B":"Segunda intervención, primeros auxilios, alarma, evacuación y recursos externos.","C":"Equipo de evacuación y centro de comunicaciones con medios propios del local.","D":"Primera intervención y equipo de primeros auxilios en la zona del siniestro."},"correcta":"B","explicacion":"Según el esquema del ejemplo 3, en una emergencia general actúan los equipos de segunda intervención, primeros auxilios, alarma, evacuación y los recursos externos."},{"id":144,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.3","subtema":"7.3. Estructura organizativa ante emergencias (equipos y jefe/centro)","enunciado":"¿Qué funciones corresponden específicamente al centro de coordinación de emergencias durante un siniestro laboral?","opciones":{"A":"Efectuar las llamadas y avisos establecidos y ordenar la evacuación según indique el jefe.","B":"Declarar el tipo de emergencia y coordinar directamente en la zona las ayudas externas.","C":"Comprobar en el punto de reunión que el sector ha quedado vacío y detectar ausencias.","D":"Acudir al foco del siniestro con los medios de zonas colindantes para controlar el daño."},"correcta":"A","explicacion":"El centro de coordinación de emergencias efectúa las llamadas según el orden establecido, da los avisos por el procedimiento previsto, sigue las instrucciones del jefe de emergencias y ordena la evacuación parcial o total cuando este lo indique."},{"id":145,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.3","subtema":"7.3. Estructura organizativa ante emergencias (equipos y jefe/centro)","enunciado":"Durante una emergencia parcial en una fábrica, un operario sufre quemaduras leves en un brazo y precisa traslado asistido hacia el exterior. ¿Qué equipo tiene encomendadas directamente ambas tareas?","opciones":{"A":"El equipo de primeros auxilios, encargado de asistir y ayudar a evacuar a los heridos.","B":"El equipo de primera intervención, responsable exclusivo de la extinción de incendios.","C":"El centro de coordinación, encargado de emitir la señal acústica por megafonía.","D":"El comité de seguridad y salud, convocado con carácter extraordinario de urgencia."},"correcta":"A","explicacion":"Las dos funciones específicas del equipo de primeros auxilios son prestar primeros auxilios a los heridos y ayudar en la evacuación de los heridos."},{"id":146,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.4","subtema":"7.4. Plan de evacuación, simulacros y señalización/comunicaciones","enunciado":"Al sonar la alarma de incendio en un edificio de cuatro plantas, parte del personal intenta bajar en el ascensor para salir más rápido y se producen empujones en la escalera. ¿Qué equipo debe impedir el uso de ascensores y controlar el flujo en escaleras?","opciones":{"A":"El equipo de segunda intervención mediante los equipos de zonas colindantes.","B":"El equipo de primeros auxilios instalado en la puerta principal del edificio.","C":"El equipo de evacuación encargado de dirigir ordenada y seguramente la salida.","D":"El servicio de prevención ajeno mediante comunicación telefónica externa."},"correcta":"C","explicacion":"Entre las misiones del equipo de evacuación figuran conducir a las personas hacia las vías de evacuación, impedir aglomeraciones, controlar velocidad y flujo en accesos a escaleras, impedir utilizar ascensores en caso de incendio y controlar ausencias en las zonas de reunión."},{"id":147,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.4","subtema":"7.4. Plan de evacuación, simulacros y señalización/comunicaciones","enunciado":"En el plan de evacuación de una empresa, ¿cuál es la finalidad principal de habilitar un «centro de comunicaciones» protegido frente a cualquier emergencia?","opciones":{"A":"Alojar al personal evacuado que espera asistencia médica durante una emergencia general.","B":"Centralizar los medios de comunicación, cuadros de alarma y toda la documentación del plan.","C":"Almacenar los equipos de protección individual destinados a la jornada ordinaria de producción.","D":"Celebrar las reuniones trimestrales del comité paritario con los delegados sindicales."},"correcta":"B","explicacion":"El centro de comunicaciones es un recinto protegido frente a emergencias donde están los medios de comunicación externos e internos, los cuadros receptores de pulsadores de alarma conectados permanentemente a sedes de emergencia y toda la documentación del plan de emergencia y evacuación."},{"id":148,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.4","subtema":"7.4. Plan de evacuación, simulacros y señalización/comunicaciones","enunciado":"Una empresa realiza un simulacro de incendio cada año y el responsable de seguridad anota el tiempo de desalojo y los atascos en una puerta lateral. Según el tema, ¿para qué sirve fundamentalmente realizar simulacros de emergencia?","opciones":{"A":"Para medir la eficacia real de las medidas de emergencia ante situaciones simuladas de peligro.","B":"Para determinar el grado de riesgo laboral de cada puesto según la matriz del INSST.","C":"Para sustituir la actualización periódica del plan de autoprotección aprobada por el técnico.","D":"Para acreditar el cumplimiento del programa anual de mantenimiento de las instalaciones."},"correcta":"A","explicacion":"El simulacro de emergencia es una representación o imitación de posibles situaciones de peligro o desastre que requieren acción inmediata, y constituye una herramienta adecuada para medir la eficacia de las medidas de emergencia."},{"id":149,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.4","subtema":"7.4. Plan de evacuación, simulacros y señalización/comunicaciones","enunciado":"Al llegar todos los trabajadores al punto de reunión tras un desalojo, ¿qué comprobación crítica debe realizar el equipo de evacuación en ese lugar seguro?","opciones":{"A":"Verificar que está todo el personal y detectar posibles ausencias, víctimas o atrapados.","B":"Evaluar la magnitud económica de los daños materiales sufridos en las máquinas.","C":"Decidir unilateralmente el regreso inmediato al puesto sin consultar al jefe de emergencias.","D":"Revisar el crédito horario consumido por los delegados durante el tiempo de evacuación."},"correcta":"A","explicacion":"En el punto de reunión (lugar seguro donde se concentran los evacuados), el equipo de evacuación comprueba que todo el personal está presente para detectar ausencias, víctimas o personal atrapado que deba ser rescatado."},{"id":150,"temaId":"tema-7","tema":"Epígrafe 7. Plan de autoprotección","subtemaId":"7.4","subtema":"7.4. Plan de evacuación, simulacros y señalización/comunicaciones","enunciado":"En el ejemplo 3 del libro, Jaime lleva cinco días contratado en una empresa y al sexto día oye una señal acústica de alarma sin saber qué hacer ni adónde ir hasta que un compañero lo guía. ¿Qué obligación básica del plan de evacuación y emergencia incumplió la empresa?","opciones":{"A":"Haber esperado un año de antigüedad antes de incluirlo en el censo del punto de reunión.","B":"Haberlo asignado directamente como jefe de emergencias por su incorporación reciente.","C":"Haberle indicado que permaneciera en su puesto hasta recibir llamada externa directa.","D":"Haberle proporcionado capacitación previa sobre los avisos y pautas de desalojo vigentes."},"correcta":"D","explicacion":"Todo trabajador —incluidos los de reciente incorporación como Jaime— debe saber qué hacer en caso de emergencia, por lo que la empresa está obligada a informarlo y formarlo previamente sobre las señales de alarma, vías de evacuación y puntos de reunión."}];
+
+      const ICON_CHECK = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      const ICON_X = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+
+      const state = {
+        scopeValue: 'all',
+        requestedCount: 15,
+        shuffle: false,
+        quizQuestions: [],
+        currentIndex: 0,
+        answers: {},
+        isIncorrectRetryMode: false
+      };
+
+      const elWelcome = document.getElementById('screen-welcome');
+      const elQuiz = document.getElementById('screen-quiz');
+      const elResults = document.getElementById('screen-results');
+      const elTopicSummaryList = document.getElementById('topic-summary-list');
+      const elScopeSelect = document.getElementById('scope-select');
+      const elCountSelect = document.getElementById('count-select');
+      const elShuffleCheckbox = document.getElementById('shuffle-checkbox');
+      const elScopeAvailability = document.getElementById('scope-availability');
+
+      const elStartBtn = document.getElementById('start-btn');
+      const elHomeBtn = document.getElementById('home-btn');
+      const elRestartBtn = document.getElementById('restart-btn');
+      const elPrevBtn = document.getElementById('prev-btn');
+      const elNextBtn = document.getElementById('next-btn');
+
+      const elProgressCounter = document.getElementById('progress-counter');
+      const elProgressAnswered = document.getElementById('progress-answered');
+      const elLiveScore = document.getElementById('live-score-label');
+      const elProgressBarWrap = document.getElementById('progress-bar-wrap');
+      const elProgressFill = document.getElementById('progress-fill');
+      const elQuestionTema = document.getElementById('question-tema');
+      const elQuestionSubtema = document.getElementById('question-subtema');
+      const elQuestionText = document.getElementById('quiz-question-text');
+      const elOptionsContainer = document.getElementById('options-container');
+      const elFeedbackContainer = document.getElementById('feedback-container');
+      const elFeedbackHeading = document.getElementById('feedback-heading');
+      const elFeedbackExplanation = document.getElementById('feedback-explanation');
+
+      const elResultsScopeLabel = document.getElementById('results-scope-label');
+      const elResGrade = document.getElementById('res-grade');
+      const elResCorrect = document.getElementById('res-correct');
+      const elResIncorrect = document.getElementById('res-incorrect');
+      const elResPercent = document.getElementById('res-percent');
+      const elResMotTitle = document.getElementById('res-motivation-title');
+      const elResMotMsg = document.getElementById('res-motivation-message');
+      const elRetryIncorrectBtn = document.getElementById('retry-incorrect-btn');
+      const elRepeatBtn = document.getElementById('repeat-btn');
+      const elChooseTopicBtn = document.getElementById('choose-topic-btn');
+      const elResultsHomeBtn = document.getElementById('results-home-btn');
+
+      function filterQuestions(scopeValue) {
+        if (scopeValue === 'all') return QUESTIONS;
+        if (scopeValue.startsWith('tema:')) {
+          const temaId = scopeValue.slice(5);
+          return QUESTIONS.filter(function (q) { return q.temaId === temaId; });
+        }
+        if (scopeValue.startsWith('subtema:')) {
+          const subtemaId = scopeValue.slice(8);
+          return QUESTIONS.filter(function (q) { return q.subtemaId === subtemaId; });
+        }
+        return QUESTIONS;
+      }
+
+      function getCountOptions(availableCount) {
+        var presets = [5, 10, 15, 20, 30, 50, 75, 100];
+        var list = presets.filter(function (n) { return n < availableCount; });
+        if (availableCount > 0 && list.indexOf(availableCount) === -1) {
+          list.push(availableCount);
+        }
+        return list;
+      }
+
+      function populateWelcome() {
+        elTopicSummaryList.innerHTML = '';
+        TEMAS_CATALOGO.forEach(function (tema) {
+          var count = QUESTIONS.filter(function (q) { return q.temaId === tema.id; }).length;
+          var li = document.createElement('li');
+          var label = document.createElement('span');
+          var dotIdx = tema.nombre.indexOf('. ');
+          var prefix = dotIdx !== -1 ? tema.nombre.slice(0, dotIdx + 1) : tema.nombre;
+          var rest = dotIdx !== -1 ? tema.nombre.slice(dotIdx + 1) : '';
+          var strong = document.createElement('strong');
+          strong.textContent = prefix;
+          label.appendChild(strong);
+          label.appendChild(document.createTextNode(rest));
+          var badge = document.createElement('span');
+          badge.className = 'topic-count tabular-nums';
+          badge.textContent = count + ' preguntas';
+          li.appendChild(label);
+          li.appendChild(badge);
+          elTopicSummaryList.appendChild(li);
+        });
+
+        elScopeSelect.innerHTML = '';
+        var allOpt = document.createElement('option');
+        allOpt.value = 'all';
+        allOpt.textContent = 'Todos los epígrafes (' + QUESTIONS.length + ' preguntas)';
+        elScopeSelect.appendChild(allOpt);
+
+        TEMAS_CATALOGO.forEach(function (tema) {
+          var group = document.createElement('optgroup');
+          group.label = tema.nombre;
+
+          var temaCount = QUESTIONS.filter(function (q) { return q.temaId === tema.id; }).length;
+          var temaOpt = document.createElement('option');
+          temaOpt.value = 'tema:' + tema.id;
+          temaOpt.textContent = 'Todo el ' + tema.nombre.split('.')[0] + ' (' + temaCount + ' preguntas)';
+          group.appendChild(temaOpt);
+
+          tema.subtemas.forEach(function (sub) {
+            var subCount = QUESTIONS.filter(function (q) { return q.subtemaId === sub.id; }).length;
+            var subOpt = document.createElement('option');
+            subOpt.value = 'subtema:' + sub.id;
+            subOpt.textContent = sub.nombre + ' (' + subCount + ' preguntas)';
+            group.appendChild(subOpt);
+          });
+
+          elScopeSelect.appendChild(group);
+        });
+
+        elScopeSelect.value = state.scopeValue;
+        syncCountSelect();
+      }
+
+      function syncCountSelect() {
+        var available = filterQuestions(state.scopeValue).length;
+        var options = getCountOptions(available);
+        elCountSelect.innerHTML = '';
+        options.forEach(function (n) {
+          var opt = document.createElement('option');
+          opt.value = String(n);
+          opt.textContent = n === available ? n + ' preguntas (todas las disponibles)' : n + ' preguntas';
+          elCountSelect.appendChild(opt);
+        });
+
+        if (options.indexOf(state.requestedCount) !== -1) {
+          elCountSelect.value = String(state.requestedCount);
+        } else {
+          var fallback = options.indexOf(15) !== -1 ? 15 : (options[options.length - 1] || available);
+          state.requestedCount = fallback;
+          elCountSelect.value = String(fallback);
+        }
+
+        elScopeAvailability.textContent = 'Disponibles en esta selección: ' + available + ' preguntas.';
+      }
+
+      function showScreen(name) {
+        elWelcome.classList.toggle('hidden', name !== 'welcome');
+        elQuiz.classList.toggle('hidden', name !== 'quiz');
+        elResults.classList.toggle('hidden', name !== 'results');
+      }
+
+      function startQuiz() {
+        var pool = filterQuestions(state.scopeValue).slice();
+        if (state.shuffle) {
+          for (var i = pool.length - 1; i > 0; i -= 1) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = pool[i];
+            pool[i] = pool[j];
+            pool[j] = tmp;
+          }
+        }
+        var count = Math.max(1, Math.min(state.requestedCount, pool.length));
+        state.quizQuestions = pool.slice(0, count);
+        state.currentIndex = 0;
+        state.answers = {};
+        state.isIncorrectRetryMode = false;
+        showScreen('quiz');
+        renderQuestion();
+      }
+
+      function getIncorrectQuestions() {
+        return state.quizQuestions.filter(function (q) {
+          return state.answers[q.id] !== undefined && state.answers[q.id] !== q.correcta;
+        });
+      }
+
+      function startRetryIncorrect() {
+        var incorrect = getIncorrectQuestions();
+        if (incorrect.length === 0) return;
+        state.quizQuestions = incorrect;
+        state.currentIndex = 0;
+        state.answers = {};
+        state.isIncorrectRetryMode = true;
+        showScreen('quiz');
+        renderQuestion();
+      }
+
+      function restartActiveQuiz() {
+        if (state.isIncorrectRetryMode) {
+          state.currentIndex = 0;
+          state.answers = {};
+          showScreen('quiz');
+          renderQuestion();
+          return;
+        }
+        startQuiz();
+      }
+
+      function renderQuestion() {
+        var q = state.quizQuestions[state.currentIndex];
+        var total = state.quizQuestions.length;
+        var answeredCount = Object.keys(state.answers).length;
+        var correctCount = 0;
+        state.quizQuestions.forEach(function (item) {
+          if (state.answers[item.id] === item.correcta) {
+            correctCount += 1;
+          }
+        });
+
+        elProgressCounter.textContent = 'Pregunta ' + (state.currentIndex + 1) + ' de ' + total;
+        elProgressAnswered.textContent = 'Respondidas: ' + answeredCount + ' de ' + total;
+        elLiveScore.textContent = 'Aciertos: ' + correctCount + ' / ' + answeredCount;
+
+        var pct = total > 0 ? Math.round((answeredCount / total) * 100) : 0;
+        elProgressBarWrap.setAttribute('aria-valuenow', String(pct));
+        elProgressFill.style.width = pct + '%';
+
+        elQuestionTema.textContent = q.tema;
+        elQuestionSubtema.textContent = q.subtema;
+        elQuestionText.textContent = q.enunciado;
+
+        var selected = state.answers[q.id];
+        var isAnswered = selected !== undefined;
+
+        elOptionsContainer.innerHTML = '';
+        ['A', 'B', 'C', 'D'].forEach(function (letter) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'option-btn';
+          btn.disabled = isAnswered;
+
+          if (isAnswered) {
+            if (letter === q.correcta) {
+              btn.classList.add('is-correct');
+            } else if (letter === selected) {
+              btn.classList.add('is-incorrect');
+            } else {
+              btn.classList.add('is-muted');
+            }
+          }
+
+          var badge = document.createElement('span');
+          badge.className = 'option-letter';
+          badge.textContent = letter;
+
+          var body = document.createElement('span');
+          body.className = 'option-body';
+          body.textContent = q.opciones[letter];
+
+          btn.appendChild(badge);
+          btn.appendChild(body);
+
+          if (isAnswered && letter === q.correcta) {
+            var okStatus = document.createElement('span');
+            okStatus.className = 'option-status';
+            okStatus.innerHTML = ICON_CHECK + '<span>Correcta</span>';
+            btn.appendChild(okStatus);
+          } else if (isAnswered && letter === selected && selected !== q.correcta) {
+            var errStatus = document.createElement('span');
+            errStatus.className = 'option-status';
+            errStatus.innerHTML = ICON_X + '<span>Tu respuesta</span>';
+            btn.appendChild(errStatus);
+          }
+
+          btn.addEventListener('click', function () {
+            if (state.answers[q.id] !== undefined) return;
+            state.answers[q.id] = letter;
+            renderQuestion();
+          });
+
+          elOptionsContainer.appendChild(btn);
+        });
+
+        if (isAnswered) {
+          var isRight = selected === q.correcta;
+          elFeedbackContainer.className = 'feedback-box ' + (isRight ? 'is-correct' : 'is-incorrect');
+          elFeedbackHeading.innerHTML = isRight
+            ? ICON_CHECK + '<span>¡Respuesta correcta! Has seleccionado la opción ' + q.correcta + '.</span>'
+            : ICON_X + '<span>Respuesta incorrecta. Has marcado ' + selected + ' y la correcta es la opción ' + q.correcta + '.</span>';
+          elFeedbackExplanation.textContent = q.explicacion;
+        } else {
+          elFeedbackContainer.className = 'feedback-box hidden';
+        }
+
+        elPrevBtn.disabled = state.currentIndex === 0;
+        elNextBtn.disabled = !isAnswered;
+        elNextBtn.textContent = state.currentIndex === total - 1 ? 'Ver resultados' : 'Siguiente pregunta';
+      }
+
+      function getMotivation(grade) {
+        if (grade >= 9) {
+          return {
+            title: 'Dominio sobresaliente',
+            message: 'Has demostrado una comprensión profunda de la gestión preventiva, la valoración de riesgos y los planes de autoprotección. Estás preparado para resolver casos prácticos con criterio técnico.'
+          };
+        }
+        if (grade >= 7) {
+          return {
+            title: 'Muy buen aprovechamiento',
+            message: 'Resuelves con soltura la mayoría de las situaciones planteadas. Repasa las explicaciones de las preguntas falladas para consolidar los umbrales y competencias específicas.'
+          };
+        }
+        if (grade >= 5) {
+          return {
+            title: 'Aprobado con margen de mejora',
+            message: 'Cuentas con una base sólida, aunque conviene reforzar la diferencia entre modalidades organizativas, las garantías de los representantes y la matriz del INSST.'
+          };
+        }
+        return {
+          title: 'Necesitas reforzar los contenidos',
+          message: 'Te recomendamos practicar por epígrafes individuales leyendo con atención las explicaciones didácticas de cada pregunta antes de volver a realizar una prueba global.'
+        };
+      }
+
+      function renderResults() {
+        var total = state.quizQuestions.length;
+        var correct = 0;
+        state.quizQuestions.forEach(function (q) {
+          if (state.answers[q.id] === q.correcta) correct += 1;
+        });
+        var incorrect = total - correct;
+        var pct = total > 0 ? Math.round((correct / total) * 1000) / 10 : 0;
+        var grade = total > 0 ? Math.round(((correct / total) * 10) * 100) / 100 : 0;
+        var mot = getMotivation(grade);
+
+        var selectedOption = elScopeSelect.options[elScopeSelect.selectedIndex];
+        var baseLabel = selectedOption ? selectedOption.textContent : 'Todos los epígrafes';
+        elResultsScopeLabel.textContent = (state.isIncorrectRetryMode ? 'Repaso de incorrectas (' + baseLabel + ')' : baseLabel) + ' · ' + total + ' preguntas realizadas';
+        elResGrade.textContent = grade.toFixed(2).replace('.', ',') + ' / 10';
+        elResCorrect.textContent = String(correct);
+        elResIncorrect.textContent = String(incorrect);
+        elResPercent.textContent = pct.toFixed(1).replace('.', ',') + ' %';
+        elResMotTitle.textContent = mot.title;
+        elResMotMsg.textContent = mot.message;
+
+        var incorrectItems = getIncorrectQuestions();
+        if (incorrectItems.length > 0) {
+          elRetryIncorrectBtn.classList.remove('hidden');
+          elRetryIncorrectBtn.textContent = 'Repetir incorrectas (' + incorrectItems.length + ')';
+          elRepeatBtn.className = 'btn btn-secondary';
+        } else {
+          elRetryIncorrectBtn.classList.add('hidden');
+          elRepeatBtn.className = 'btn btn-primary';
+        }
+        showScreen('results');
+      }
+
+      elScopeSelect.addEventListener('change', function (e) {
+        state.scopeValue = e.target.value;
+        syncCountSelect();
+      });
+
+      elCountSelect.addEventListener('change', function (e) {
+        state.requestedCount = Number(e.target.value);
+      });
+
+      elShuffleCheckbox.addEventListener('change', function (e) {
+        state.shuffle = e.target.checked;
+      });
+
+      elStartBtn.addEventListener('click', startQuiz);
+      elRestartBtn.addEventListener('click', restartActiveQuiz);
+      elRetryIncorrectBtn.addEventListener('click', startRetryIncorrect);
+      elRepeatBtn.addEventListener('click', startQuiz);
+
+      elHomeBtn.addEventListener('click', function () {
+        showScreen('welcome');
+      });
+      elChooseTopicBtn.addEventListener('click', function () {
+        showScreen('welcome');
+      });
+      elResultsHomeBtn.addEventListener('click', function () {
+        showScreen('welcome');
+      });
+
+      elPrevBtn.addEventListener('click', function () {
+        if (state.currentIndex > 0) {
+          state.currentIndex -= 1;
+          renderQuestion();
+        }
+      });
+
+      elNextBtn.addEventListener('click', function () {
+        var q = state.quizQuestions[state.currentIndex];
+        if (!q || state.answers[q.id] === undefined) return;
+        if (state.currentIndex < state.quizQuestions.length - 1) {
+          state.currentIndex += 1;
+          renderQuestion();
+        } else {
+          renderResults();
+        }
+      });
+
+      populateWelcome();
+    })();
+  </script>
+</body>
+</html>
